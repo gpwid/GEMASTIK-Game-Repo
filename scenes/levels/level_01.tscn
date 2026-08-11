@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://1al25404mbam"]
+
+[ext_resource type="Texture2D" uid="uid://bglo1rh1wlnda" path="res://assets/sprites/maps/level_01_background.png" id="1_m802k"]
+[ext_resource type="PackedScene" uid="uid://0jd4dyuh4xyg" path="res://scenes/objects/supply_hub.tscn" id="2_i2aat"]
+[ext_resource type="PackedScene" uid="uid://b6xn2uiqjcppw" path="res://scenes/objects/village.tscn" id="3_2djvx"]
+
+[node name="Level01" type="Node2D" unique_id=2095256609]
+
+[node name="MapBackground" type="Sprite2D" parent="." unique_id=50748692]
+z_index = -100
+texture = ExtResource("1_m802k")
+centered = false
+
+[node name="MapObjects" type="Node2D" parent="." unique_id=1118112085]
+
+[node name="SupplyHub" parent="MapObjects" unique_id=1183306678 instance=ExtResource("2_i2aat")]
+position = Vector2(128, 880)
+
+[node name="VillageA" parent="MapObjects" unique_id=1158911162 instance=ExtResource("3_2djvx")]
+position = Vector2(1296, 720)
+
+[node name="VillageB" parent="MapObjects" unique_id=346501832 instance=ExtResource("3_2djvx")]
+position = Vector2(800, 480)
+
+[node name="Routes" type="Node2D" parent="." unique_id=2047182361]
+
+[node name="Vehicles" type="Node2D" parent="." unique_id=719179218]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2132739644]

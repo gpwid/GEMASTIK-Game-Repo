@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://0jd4dyuh4xyg"]
+
+[ext_resource type="Texture2D" uid="uid://bujf0dxo1nptn" path="res://assets/sprites/objects/supplyhub.png" id="1_rij8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol4vb"]
+size = Vector2(50, 56)
+
+[node name="SupplyHub" type="Area2D" unique_id=1183306678]
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=601473558]
+texture = ExtResource("1_rij8j")
+
+[node name="InteractionArea" type="CollisionShape2D" parent="." unique_id=2026519343]
+position = Vector2(-1, 4)
+shape = SubResource("RectangleShape2D_ol4vb")
+
+[node name="RouteOrigin" type="Marker2D" parent="." unique_id=1731600468]

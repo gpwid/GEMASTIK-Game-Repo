@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b6xn2uiqjcppw"]
+
+[ext_resource type="Texture2D" uid="uid://36o83yyuoxgy" path="res://assets/sprites/objects/village.svg" id="1_rpp0c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ol4vb"]
+radius = 40.0
+
+[node name="Village" type="Area2D" unique_id=1158911162]
+
+[node name="CrisisIndicator" type="Sprite2D" parent="." unique_id=871665381]
+modulate = Color(0.42352942, 0.83137256, 0, 1)
+z_index = -1
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=676704296]
+texture = ExtResource("1_rpp0c")
+
+[node name="InteractionArea" type="CollisionShape2D" parent="." unique_id=1395953621]
+shape = SubResource("CircleShape2D_ol4vb")
+
+[node name="RouteTarget" type="Marker2D" parent="." unique_id=24533652]
+
+[node name="RequestDisplayOrigin" type="Marker2D" parent="." unique_id=114471634]
+position = Vector2(40, -24)
