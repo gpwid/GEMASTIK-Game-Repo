@@ -1,0 +1,7 @@
+# Godot-specific ignores
+.godot/
+*.translation
+
+# OS-generated files
+.DS_Store
+Thumbs.db
