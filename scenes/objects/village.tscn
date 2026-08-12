@@ -11,7 +11,7 @@ radius = 40.0
 [node name="Village" type="Area2D" unique_id=1158911162]
 script = ExtResource("1_5lu8w")
 
-[node name="CrisisTimer" type="TextureProgressBar" parent="." unique_id=740801342]
+[node name="CrisisGauge" type="TextureProgressBar" parent="." unique_id=740801342]
 z_index = -1
 offset_left = -38.0
 offset_top = -38.0
@@ -19,13 +19,12 @@ offset_right = 218.0
 offset_bottom = 218.0
 scale = Vector2(0.3, 0.3)
 mouse_filter = 2
-max_value = 25.0
 step = 0.1
 fill_mode = 4
 texture_under = ExtResource("1_87u6w")
 texture_progress = ExtResource("1_87u6w")
 tint_under = Color(0.11372549, 0, 0.7607843, 0)
-tint_progress = Color(0.12156863, 0.11372549, 0.10980392, 1)
+tint_progress = Color(0.79, 0.55300003, 0, 1)
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=676704296]
 texture = ExtResource("1_rpp0c")
@@ -77,7 +76,18 @@ shape = SubResource("CircleShape2D_ol4vb")
 position = Vector2(40, -24)
 
 [node name="RequestTimer" type="Timer" parent="." unique_id=342508374]
+wait_time = 8.0
 autostart = true
+
+[node name="FullQueueTimer" type="Timer" parent="." unique_id=1064319099]
+wait_time = 10.0
+one_shot = true
+
+[node name="FailureTimer" type="Timer" parent="." unique_id=24077114]
+wait_time = 15.0
+one_shot = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="timeout" from="RequestTimer" to="." method="_on_request_timer_timeout"]
+[connection signal="timeout" from="FullQueueTimer" to="." method="_on_full_queue_timer_timeout"]
+[connection signal="timeout" from="FailureTimer" to="." method="_on_failure_timer_timeout"]

@@ -5,6 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://0jd4dyuh4xyg" path="res://scenes/objects/supply_hub.tscn" id="2_i2aat"]
 [ext_resource type="PackedScene" uid="uid://b6xn2uiqjcppw" path="res://scenes/objects/village.tscn" id="3_2djvx"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
+bg_color = Color(0.0962, 0.27873328, 0.37, 0.54509807)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Level01" type="Node2D" unique_id=2095256609]
 script = ExtResource("1_uvc87")
 
@@ -40,6 +51,117 @@ antialiased = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2132739644]
 
+[node name="GameOverScreen" type="ColorRect" parent="UI" unique_id=459150233]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6901961)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameOverScreen" unique_id=1131298812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/GameOverScreen/CenterContainer" unique_id=369821698]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvc87")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameOverScreen/CenterContainer/PanelContainer" unique_id=1838769685]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer" unique_id=618527585]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=131395407]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "JALUR SUPLAI TERPUTUS"
+horizontal_alignment = 1
+
+[node name="FailedVillageLabel" type="Label" parent="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=875931492]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Salah satu desa gagal menerima bantuan."
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2137026591]
+process_mode = 3
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+text = "COBA LAGI"
+
+[node name="VictoryScreen" type="ColorRect" parent="UI" unique_id=91111097]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6901961)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/VictoryScreen" unique_id=1584662400]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/VictoryScreen/CenterContainer" unique_id=1453334459]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvc87")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/VictoryScreen/CenterContainer/PanelContainer" unique_id=1767075870]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer" unique_id=96817529]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1310476212]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "JALUR SUPLAI STABIL!"
+horizontal_alignment = 1
+
+[node name="VictoryMessageLabel" type="Label" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=603078414]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Seluruh desa berhasil dipertahankan"
+horizontal_alignment = 1
+
+[node name="ReplayButton" type="Button" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1833705497]
+process_mode = 3
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+text = "MAIN LAGI"
+
+[node name="SustainTimer" type="Timer" parent="." unique_id=737803136]
+wait_time = 60.0
+one_shot = true
+
 [connection signal="route_drag_started" from="MapObjects/SupplyHub" to="." method="_on_supply_hub_route_drag_started"]
 [connection signal="route_drag_finished" from="MapObjects/VillageA" to="." method="_on_village_a_route_drag_finished"]
+[connection signal="village_failed" from="MapObjects/VillageA" to="." method="_on_village_a_village_failed"]
 [connection signal="route_drag_finished" from="MapObjects/VillageB" to="." method="_on_village_b_route_drag_finished"]
+[connection signal="village_failed" from="MapObjects/VillageB" to="." method="_on_village_b_village_failed"]
+[connection signal="pressed" from="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="timeout" from="SustainTimer" to="." method="_on_sustain_timer_timeout"]
