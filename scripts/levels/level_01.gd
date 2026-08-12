@@ -20,29 +20,36 @@ func _on_supply_hub_route_drag_started(origin_position: Vector2) -> void:
 	route_preview.visible = true
 	is_drawing_route = true
 	
-func finish_route(target_position: Vector2) -> void:
+func finish_route(target_position: Vector2, target_village: Area2D) -> void:
 	if is_drawing_route == false:
 		return
+		
+	print("Target Village: ", target_village.name)
 	
 	var local_pos = route_preview.to_local(target_position)
 	route_preview.set_point_position(1, local_pos)
 	var start_pos = route_preview.get_point_position(0)
 	var end_pos = route_preview.get_point_position(1)
-	var new_route: Path2D = ROUTE_SCENE.instantiate() as Path2D
+	var new_route: Path2D = ROUTE_SCENE.instantiate() as SupplyRoute
+	new_route.target_village = target_village
+	print("Route destination saved: ", new_route.target_village.name)
+	
 	var new_curve: Curve2D = Curve2D.new()
 	new_curve.add_point(start_pos)
 	new_curve.add_point(end_pos)
 	new_route.curve = new_curve
+	
 	var route_line: Line2D = new_route.get_node("RouteLine") as Line2D
 	route_line.points = route_preview.points
 	$Routes.add_child(new_route, true)
 	route_preview.clear_points()
 	route_preview.visible = false
 	is_drawing_route = false
+	
 	print("Route Completed")
 	
-func _on_village_a_route_drag_finished(target_position: Vector2) -> void:
-	finish_route(target_position)
+func _on_village_a_route_drag_finished(target_position: Vector2, target_village: Area2D) -> void:
+	finish_route(target_position, target_village)
 
-func _on_village_b_route_drag_finished(target_position: Vector2) -> void:
-	finish_route(target_position)
+func _on_village_b_route_drag_finished(target_position: Vector2, target_village: Area2D) -> void:
+	finish_route(target_position, target_village)

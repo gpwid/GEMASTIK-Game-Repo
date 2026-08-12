@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://s5yo2tsnfmyp" path="res://scripts/objects/village.gd" id="1_5lu8w"]
 [ext_resource type="Texture2D" uid="uid://bpfmkr63civqj" path="res://assets/sprites/objects/timer_ring.svg" id="1_87u6w"]
 [ext_resource type="Texture2D" uid="uid://36o83yyuoxgy" path="res://assets/sprites/objects/village.svg" id="1_rpp0c"]
+[ext_resource type="Texture2D" uid="uid://bm70ime2tsuv7" path="res://assets/sprites/objects/cargo_food.svg" id="4_331xm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ol4vb"]
 radius = 40.0
@@ -29,6 +30,44 @@ tint_progress = Color(0.12156863, 0.11372549, 0.10980392, 1)
 [node name="Visual" type="Sprite2D" parent="." unique_id=676704296]
 texture = ExtResource("1_rpp0c")
 
+[node name="RequestSlots" type="Node2D" parent="." unique_id=1371114503]
+
+[node name="Slot1" type="Sprite2D" parent="RequestSlots" unique_id=604612542]
+visible = false
+position = Vector2(50.5, -29.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
+[node name="Slot2" type="Sprite2D" parent="RequestSlots" unique_id=1167477914]
+visible = false
+position = Vector2(74.5, -29.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
+[node name="Slot3" type="Sprite2D" parent="RequestSlots" unique_id=267506702]
+visible = false
+position = Vector2(98.5, -29.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
+[node name="Slot4" type="Sprite2D" parent="RequestSlots" unique_id=1779401649]
+visible = false
+position = Vector2(50.5, -5.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
+[node name="Slot5" type="Sprite2D" parent="RequestSlots" unique_id=997632505]
+visible = false
+position = Vector2(74.5, -5.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
+[node name="Slot6" type="Sprite2D" parent="RequestSlots" unique_id=1931397212]
+visible = false
+position = Vector2(98.5, -5.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_331xm")
+
 [node name="InteractionArea" type="CollisionShape2D" parent="." unique_id=1395953621]
 shape = SubResource("CircleShape2D_ol4vb")
 
@@ -37,4 +76,8 @@ shape = SubResource("CircleShape2D_ol4vb")
 [node name="RequestDisplayOrigin" type="Marker2D" parent="." unique_id=114471634]
 position = Vector2(40, -24)
 
+[node name="RequestTimer" type="Timer" parent="." unique_id=342508374]
+autostart = true
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_request_timer_timeout"]
