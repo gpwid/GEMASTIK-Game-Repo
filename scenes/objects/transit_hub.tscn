@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d2qetmjnnau8x"]
+
+[ext_resource type="Script" uid="uid://bvm5vvj8dc8b0" path="res://scripts/objects/transit_hub.gd" id="1_a2w1y"]
+[ext_resource type="Texture2D" uid="uid://dsn5sf6inwnhb" path="res://assets/sprites/objects/transithub_land.png" id="2_vyby3"]
+[ext_resource type="Texture2D" uid="uid://bcjb8ywc53651" path="res://assets/sprites/objects/transithub_port.png" id="3_0sbao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vyby3"]
+size = Vector2(176, 112)
+
+[node name="TransitHub" type="Area2D" unique_id=958924192]
+script = ExtResource("1_a2w1y")
+
+[node name="LandVisual" type="Sprite2D" parent="." unique_id=1824309790]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vyby3")
+
+[node name="PortVisual" type="Sprite2D" parent="." unique_id=730421933]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_0sbao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=768631446]
+shape = SubResource("RectangleShape2D_vyby3")
+
+[node name="TruckStop" type="Marker2D" parent="." unique_id=1373563395]
+
+[node name="ShipDock" type="Marker2D" parent="." unique_id=189007221]
+
+[node name="CargoDisplayOrigin" type="Marker2D" parent="." unique_id=684137944]
+position = Vector2(0, -40)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

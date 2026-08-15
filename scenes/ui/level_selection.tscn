@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://fnbvor860fdl"]
+
+[ext_resource type="Script" uid="uid://dhjuenr374e5c" path="res://scripts/ui/level_selection.gd" id="1_l1igk"]
+[ext_resource type="Texture2D" uid="uid://258glpmpc5j7" path="res://assets/ui/background_blur_mainmenu.png" id="1_r4y5g"]
+
+[node name="LevelSelection" type="Control" unique_id=878392079]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_l1igk")
+
+[node name="Background" type="TextureRect" parent="." unique_id=857113388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_r4y5g")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundTint" type="ColorRect" parent="." unique_id=1651114173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6117647)
+
+[node name="SafeMargin" type="MarginContainer" parent="." unique_id=43513975]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="ScreenColumn" type="VBoxContainer" parent="SafeMargin" unique_id=432766166]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn" unique_id=1708818311]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BackButton" type="Button" parent="SafeMargin/ScreenColumn/HeaderRow" unique_id=2079480511]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Back
+"
+
+[node name="HeaderGap" type="Control" parent="SafeMargin/ScreenColumn/HeaderRow" unique_id=1813975503]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SelectionTitle" type="Label" parent="SafeMargin/ScreenColumn/HeaderRow" unique_id=325018288]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Select Level"
+vertical_alignment = 1
+
+[node name="LevelCenter" type="CenterContainer" parent="SafeMargin/ScreenColumn" unique_id=1311000716]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="SafeMargin/ScreenColumn/LevelCenter" unique_id=652414041]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
+columns = 3
+
+[node name="Level1Button" type="Button" parent="SafeMargin/ScreenColumn/LevelCenter/GridContainer" unique_id=691270043]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 600)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Level 1
+"
+
+[node name="Level2Button" type="Button" parent="SafeMargin/ScreenColumn/LevelCenter/GridContainer" unique_id=1374732269]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 600)
+layout_mode = 2
+tooltip_text = "Coming soon yaa!"
+theme_override_font_sizes/font_size = 48
+disabled = true
+text = "Level 2
+"
+
+[node name="EndlessButton" type="Button" parent="SafeMargin/ScreenColumn/LevelCenter/GridContainer" unique_id=842317246]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 600)
+layout_mode = 2
+tooltip_text = "Coming soon yaa!"
+theme_override_font_sizes/font_size = 48
+disabled = true
+text = "Endless 
+Mode
+"
+
+[connection signal="pressed" from="SafeMargin/ScreenColumn/HeaderRow/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SafeMargin/ScreenColumn/LevelCenter/GridContainer/Level1Button" to="." method="_on_level_1_button_pressed"]

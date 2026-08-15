@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b4xdc1vghuji5"]
+
+[ext_resource type="Script" uid="uid://b6xlo1ot64bbb" path="res://scripts/objects/vehicle.gd" id="1_hwanw"]
+[ext_resource type="Texture2D" uid="uid://b7of62kmd224v" path="res://assets/sprites/objects/truck.svg" id="1_kb82c"]
+[ext_resource type="Texture2D" uid="uid://cueokwrf76d50" path="res://assets/sprites/objects/truck_mini_icon.png" id="2_7teek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol4vb"]
+size = Vector2(260.00006, 100.00002)
+
+[node name="Truck" type="Node2D" unique_id=150550452]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_hwanw")
+vehicle_name = "Truck 1"
+vehicle_icon = ExtResource("2_7teek")
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=1342620774]
+texture = ExtResource("1_kb82c")
+
+[node name="CargoDisplayOrigin" type="Marker2D" parent="." unique_id=1128677398]
+position = Vector2(0, -48)
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1738349627]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=704202435]
+position = Vector2(-2.9802318e-06, 2.6822086e-06)
+scale = Vector2(0.9999995, 0.9999995)
+shape = SubResource("RectangleShape2D_ol4vb")
+
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]

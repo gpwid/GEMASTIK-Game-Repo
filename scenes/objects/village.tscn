@@ -2,14 +2,19 @@
 
 [ext_resource type="Script" uid="uid://s5yo2tsnfmyp" path="res://scripts/objects/village.gd" id="1_5lu8w"]
 [ext_resource type="Texture2D" uid="uid://bpfmkr63civqj" path="res://assets/sprites/objects/timer_ring.svg" id="1_87u6w"]
-[ext_resource type="Texture2D" uid="uid://36o83yyuoxgy" path="res://assets/sprites/objects/village.svg" id="1_rpp0c"]
+[ext_resource type="Texture2D" uid="uid://fjxpvtl3krcq" path="res://assets/sprites/objects/cargo_medical.svg" id="3_arnhj"]
 [ext_resource type="Texture2D" uid="uid://bm70ime2tsuv7" path="res://assets/sprites/objects/cargo_food.svg" id="4_331xm"]
+[ext_resource type="Texture2D" uid="uid://by5ggba2jgp5f" path="res://assets/sprites/objects/cargo_infrastructure.svg" id="4_p3h2e"]
+[ext_resource type="Texture2D" uid="uid://cgo26f23fdfq4" path="res://assets/sprites/objects/village.png" id="6_arnhj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ol4vb"]
-radius = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h2e"]
+size = Vector2(80, 56)
 
 [node name="Village" type="Area2D" unique_id=1158911162]
 script = ExtResource("1_5lu8w")
+food_icon = ExtResource("4_331xm")
+medical_icon = ExtResource("3_arnhj")
+infrastructure_icon = ExtResource("4_p3h2e")
 
 [node name="CrisisGauge" type="TextureProgressBar" parent="." unique_id=740801342]
 z_index = -1
@@ -27,53 +32,48 @@ tint_under = Color(0.11372549, 0, 0.7607843, 0)
 tint_progress = Color(0.79, 0.55300003, 0, 1)
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=676704296]
-texture = ExtResource("1_rpp0c")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_arnhj")
 
 [node name="RequestSlots" type="Node2D" parent="." unique_id=1371114503]
+position = Vector2(76, -20)
+scale = Vector2(0.25, 0.25)
 
 [node name="Slot1" type="Sprite2D" parent="RequestSlots" unique_id=604612542]
-visible = false
-position = Vector2(50.5, -29.5)
+position = Vector2(-96, -64)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="Slot2" type="Sprite2D" parent="RequestSlots" unique_id=1167477914]
-visible = false
-position = Vector2(74.5, -29.5)
+position = Vector2(0, -64)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="Slot3" type="Sprite2D" parent="RequestSlots" unique_id=267506702]
-visible = false
-position = Vector2(98.5, -29.5)
+position = Vector2(96, -64)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="Slot4" type="Sprite2D" parent="RequestSlots" unique_id=1779401649]
-visible = false
-position = Vector2(50.5, -5.5)
+position = Vector2(-96, 32)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="Slot5" type="Sprite2D" parent="RequestSlots" unique_id=997632505]
-visible = false
-position = Vector2(74.5, -5.5)
+position = Vector2(0, 32)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="Slot6" type="Sprite2D" parent="RequestSlots" unique_id=1931397212]
-visible = false
-position = Vector2(98.5, -5.5)
+position = Vector2(96, 32)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_331xm")
 
 [node name="InteractionArea" type="CollisionShape2D" parent="." unique_id=1395953621]
-shape = SubResource("CircleShape2D_ol4vb")
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_p3h2e")
 
 [node name="RouteTarget" type="Marker2D" parent="." unique_id=24533652]
-
-[node name="RequestDisplayOrigin" type="Marker2D" parent="." unique_id=114471634]
-position = Vector2(40, -24)
 
 [node name="RequestTimer" type="Timer" parent="." unique_id=342508374]
 wait_time = 8.0

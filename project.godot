@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NusantaraSupplyChain"
-run/main_scene="uid://1al25404mbam"
+run/main_scene="uid://dvac8wqrvcfj5"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

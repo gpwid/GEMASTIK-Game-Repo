@@ -4,6 +4,13 @@
 [ext_resource type="Script" uid="uid://bn7y0ybhudsjm" path="res://scripts/levels/level_01.gd" id="1_uvc87"]
 [ext_resource type="PackedScene" uid="uid://0jd4dyuh4xyg" path="res://scenes/objects/supply_hub.tscn" id="2_i2aat"]
 [ext_resource type="PackedScene" uid="uid://b6xn2uiqjcppw" path="res://scenes/objects/village.tscn" id="3_2djvx"]
+[ext_resource type="PackedScene" uid="uid://d2qetmjnnau8x" path="res://scenes/objects/transit_hub.tscn" id="3_qdh5e"]
+[ext_resource type="PackedScene" uid="uid://bba6xfcmpqleg" path="res://scenes/objects/transport_route.tscn" id="6_50wog"]
+[ext_resource type="PackedScene" uid="uid://b8b1g0hgfaucb" path="res://scenes/ui/vehicle_inventory.tscn" id="7_1ey3t"]
+[ext_resource type="Texture2D" uid="uid://cueokwrf76d50" path="res://assets/sprites/objects/truck_mini_icon.png" id="8_kfebt"]
+[ext_resource type="Script" uid="uid://dku583bjk3re2" path="res://scripts/ui/vehicle_inventory_entry.gd" id="8_r72dd"]
+[ext_resource type="Texture2D" uid="uid://gvft728vhnsg" path="res://assets/sprites/objects/boat_mini_icon.png" id="9_r72dd"]
+[ext_resource type="PackedScene" uid="uid://uvto0wf2h7vy" path="res://scenes/ui/game_hud.tscn" id="11_ijn0p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
 bg_color = Color(0.0962, 0.27873328, 0.37, 0.54509807)
@@ -16,6 +23,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Resource" id="Resource_ijn0p"]
+script = ExtResource("8_r72dd")
+starting_count = 3
+icon = ExtResource("8_kfebt")
+metadata/_custom_type_script = "uid://dku583bjk3re2"
+
+[sub_resource type="Resource" id="Resource_jmes4"]
+script = ExtResource("8_r72dd")
+transport_mode = 2
+starting_count = 3
+icon = ExtResource("9_r72dd")
+metadata/_custom_type_script = "uid://dku583bjk3re2"
+
 [node name="Level01" type="Node2D" unique_id=2095256609]
 script = ExtResource("1_uvc87")
 
@@ -27,14 +47,34 @@ centered = false
 [node name="MapObjects" type="Node2D" parent="." unique_id=1118112085]
 
 [node name="SupplyHub" parent="MapObjects" unique_id=1183306678 instance=ExtResource("2_i2aat")]
-position = Vector2(304, 848)
-scale = Vector2(0.2, 0.2)
+position = Vector2(120, 920)
+scale = Vector2(0.5, 0.5)
 
 [node name="VillageA" parent="MapObjects" unique_id=1158911162 instance=ExtResource("3_2djvx")]
-position = Vector2(1296, 720)
+position = Vector2(1312, 696)
+island_id = 2
+is_coastal = true
 
 [node name="VillageB" parent="MapObjects" unique_id=346501832 instance=ExtResource("3_2djvx")]
-position = Vector2(800, 480)
+position = Vector2(824, 272)
+island_id = 1
+
+[node name="TransitHubs" type="Node2D" parent="MapObjects" unique_id=1659810284]
+
+[node name="TransitLandA" parent="MapObjects/TransitHubs" unique_id=958924192 instance=ExtResource("3_qdh5e")]
+position = Vector2(128, 640)
+scale = Vector2(0.5, 0.5)
+
+[node name="PortA" parent="MapObjects/TransitHubs" unique_id=1337208770 instance=ExtResource("3_qdh5e")]
+position = Vector2(544, 856)
+scale = Vector2(0.5, 0.5)
+is_port = true
+
+[node name="PortB" parent="MapObjects/TransitHubs" unique_id=2123855037 instance=ExtResource("3_qdh5e")]
+position = Vector2(792, 504)
+scale = Vector2(0.5, 0.5)
+is_port = true
+island_id = 1
 
 [node name="Routes" type="Node2D" parent="." unique_id=2047182361]
 
@@ -47,12 +87,15 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
-[node name="Vehicles" type="Node2D" parent="." unique_id=719179218]
+[node name="TransportRoutes" parent="." unique_id=1185850775 instance=ExtResource("6_50wog")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2132739644]
 
+[node name="GameHud" parent="UI" unique_id=257253525 instance=ExtResource("11_ijn0p")]
+unique_name_in_owner = true
+
 [node name="GameOverScreen" type="ColorRect" parent="UI" unique_id=459150233]
-process_mode = 3
+process_mode = 2
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,10 +143,17 @@ horizontal_alignment = 1
 process_mode = 3
 custom_minimum_size = Vector2(240, 64)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "COBA LAGI"
 
+[node name="GameOverLevelSelectButton" type="Button" parent="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=86385600]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "PILIH LEVEL LAIN"
+
 [node name="VictoryScreen" type="ColorRect" parent="UI" unique_id=91111097]
-process_mode = 3
+process_mode = 2
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,14 +197,34 @@ theme_override_font_sizes/font_size = 28
 text = "Seluruh desa berhasil dipertahankan"
 horizontal_alignment = 1
 
-[node name="ReplayButton" type="Button" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1833705497]
-process_mode = 3
-custom_minimum_size = Vector2(240, 64)
+[node name="ReplayButton" type="Button" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1591014191]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-text = "MAIN LAGI"
+theme_override_font_sizes/font_size = 16
+text = "MAIN ULANG"
+
+[node name="GameOverLevelSelectButton2" type="Button" parent="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=259052972]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "PILIH LEVEL LAIN"
+
+[node name="VehicleInventory" parent="UI" unique_id=1318327746 instance=ExtResource("7_1ey3t")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -180.0
+offset_right = 0.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 2
+vehicle_entries = Array[ExtResource("8_r72dd")]([SubResource("Resource_ijn0p"), SubResource("Resource_jmes4")])
 
 [node name="SustainTimer" type="Timer" parent="." unique_id=737803136]
-wait_time = 60.0
+wait_time = 20.0
 one_shot = true
 
 [connection signal="route_drag_started" from="MapObjects/SupplyHub" to="." method="_on_supply_hub_route_drag_started"]
@@ -162,6 +232,18 @@ one_shot = true
 [connection signal="village_failed" from="MapObjects/VillageA" to="." method="_on_village_a_village_failed"]
 [connection signal="route_drag_finished" from="MapObjects/VillageB" to="." method="_on_village_b_route_drag_finished"]
 [connection signal="village_failed" from="MapObjects/VillageB" to="." method="_on_village_b_village_failed"]
+[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_land_a_connection_drag_finished"]
+[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_connection_drag_finished"]
+[connection signal="connection_drag_started" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_land_a_connection_drag_started"]
+[connection signal="connection_drag_started" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_connection_drag_started"]
+[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortA" to="." method="_on_port_a_connection_drag_finished"]
+[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortA" to="." method="_on_transit_connection_drag_finished"]
+[connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortA" to="." method="_on_port_a_connection_drag_started"]
+[connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortA" to="." method="_on_transit_connection_drag_started"]
+[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortB" to="." method="_on_transit_connection_drag_finished"]
+[connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortB" to="." method="_on_transit_connection_drag_started"]
 [connection signal="pressed" from="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GameOverLevelSelectButton" to="." method="_on_level_selection_button_pressed"]
 [connection signal="pressed" from="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GameOverLevelSelectButton2" to="." method="_on_level_selection_button_pressed"]
 [connection signal="timeout" from="SustainTimer" to="." method="_on_sustain_timer_timeout"]

@@ -1,0 +1,307 @@
+[gd_scene format=3 uid="uid://dvac8wqrvcfj5"]
+
+[ext_resource type="Script" uid="uid://bsfairm4avf8c" path="res://scripts/ui/main_menu.gd" id="1_btxxm"]
+[ext_resource type="Texture2D" uid="uid://258glpmpc5j7" path="res://assets/ui/background_blur_mainmenu.png" id="1_fe2o3"]
+[ext_resource type="Texture2D" uid="uid://bej4cefocbx40" path="res://assets/ui/day_icon.svg" id="3_uhagc"]
+[ext_resource type="Texture2D" uid="uid://bwwrp3t1c8msi" path="res://assets/ui/pasokan_logo.png" id="3_wb0q5"]
+[ext_resource type="Texture2D" uid="uid://dk07cki2k8b6j" path="res://assets/ui/time_icon.svg" id="4_btxxm"]
+[ext_resource type="Texture2D" uid="uid://d4awfn412vnfn" path="res://assets/ui/supply_icon.svg" id="5_wb0q5"]
+[ext_resource type="Texture2D" uid="uid://clc27sg3e3jux" path="res://assets/ui/routes_icon.svg" id="6_q85j6"]
+
+[node name="MainMenu" type="Control" unique_id=2003152575]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_btxxm")
+
+[node name="Background" type="TextureRect" parent="." unique_id=97249080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_fe2o3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundTint" type="ColorRect" parent="." unique_id=1741701172]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6117647)
+
+[node name="SafeMargin" type="MarginContainer" parent="." unique_id=1851533998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="ScreenColumn" type="VBoxContainer" parent="SafeMargin" unique_id=1391635008]
+layout_mode = 2
+
+[node name="MainRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn" unique_id=328642836]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftRegion" type="CenterContainer" parent="SafeMargin/ScreenColumn/MainRow" unique_id=758418172]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="LeftColumn" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion" unique_id=384865705]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GameLogo" type="TextureRect" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn" unique_id=691618527]
+layout_mode = 2
+texture = ExtResource("3_wb0q5")
+
+[node name="LogoMenuGap" type="Control" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn" unique_id=982406263]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Navigation" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn" unique_id=46712904]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 48
+
+[node name="Continue" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=147634569]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+tooltip_text = "Coming soon di versi final!"
+theme_override_font_sizes/font_size = 48
+disabled = true
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=1352295789]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "New Game"
+
+[node name="Settings" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=1788426687]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+tooltip_text = "Coming soon di versi final!"
+theme_override_font_sizes/font_size = 48
+disabled = true
+text = "Settings"
+
+[node name="Credits" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=1749454331]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=810861435]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Exit"
+
+[node name="RegionGap" type="Control" parent="SafeMargin/ScreenColumn/MainRow" unique_id=889844636]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="RightRegion" type="CenterContainer" parent="SafeMargin/ScreenColumn/MainRow" unique_id=48938911]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="RightSwitcher" type="TabContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion" unique_id=1763605497]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 440)
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="RecordView" type="CenterContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher" unique_id=514185547]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="RecordColumn" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView" unique_id=476902815]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RecordTitle" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn" unique_id=233337597]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Best Record"
+horizontal_alignment = 1
+
+[node name="RecordPanel" type="PanelContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn" unique_id=415463759]
+layout_mode = 2
+
+[node name="RecordMargin" type="MarginContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel" unique_id=2002427824]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="RecordRows" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin" unique_id=719871901]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="RecordLevelLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=2096031290]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Level 1"
+
+[node name="DayRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=2039684501]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="DayIcon" type="TextureRect" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/DayRow" unique_id=2025204249]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_uhagc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BestDayLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/DayRow" unique_id=370331222]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Day: -"
+
+[node name="TimeRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=133404194]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TimeIcon" type="TextureRect" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/TimeRow" unique_id=1002806950]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_btxxm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BestTimeLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/TimeRow" unique_id=2110237552]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Time: --:--:--"
+
+[node name="LogisticsRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=477464203]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="LogisticsIcon" type="TextureRect" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/LogisticsRow" unique_id=1100497005]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_wb0q5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BestLogisticsLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/LogisticsRow" unique_id=1875120786]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Supplies Delivered: -"
+
+[node name="RouteRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=1977315261]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="RouteIcon" type="TextureRect" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/RouteRow" unique_id=1338368231]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_q85j6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BestRouteLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/RouteRow" unique_id=295965288]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Routes Used: -"
+
+[node name="CreditsView" type="CenterContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher" unique_id=1628320891]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="CreditsColumn" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView" unique_id=1904955863]
+layout_mode = 2
+
+[node name="CreditsPanel" type="PanelContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn" unique_id=1710056676]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsMargin" type="MarginContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel" unique_id=1299576831]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="CreditsList" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin" unique_id=1430559714]
+layout_mode = 2
+
+[node name="CreditsTitle" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin/CreditsList" unique_id=2097382298]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin/CreditsList" unique_id=929075769]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Gusti Panji Widodo- Lead Programmer "
+
+[node name="Label2" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin/CreditsList" unique_id=1467184643]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Muhammad Nabil Alfathan - UI Artist"
+
+[node name="Label3" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin/CreditsList" unique_id=1184739414]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Zidan Nugraha Rey - 2D Artist"
+
+[node name="FooterRow" type="HBoxContainer" parent="SafeMargin/ScreenColumn" unique_id=738779155]
+layout_mode = 2
+
+[node name="FooterSpacer" type="Control" parent="SafeMargin/ScreenColumn/FooterRow" unique_id=446470843]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StudioCredit" type="Label" parent="SafeMargin/ScreenColumn/FooterRow" unique_id=801786355]
+layout_mode = 2
+text = "Sparkle Studio, 2026"
+
+[connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Continue" to="." method="show_best_record"]
+[connection signal="focus_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="show_best_record"]
+[connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="show_best_record"]
+[connection signal="pressed" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Settings" to="." method="show_best_record"]
+[connection signal="focus_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Credits" to="." method="show_credits"]
+[connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Credits" to="." method="show_credits"]
+[connection signal="focus_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/ExitButton" to="." method="show_best_record"]
+[connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/ExitButton" to="." method="show_best_record"]
+[connection signal="pressed" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/ExitButton" to="." method="_on_exit_button_pressed"]

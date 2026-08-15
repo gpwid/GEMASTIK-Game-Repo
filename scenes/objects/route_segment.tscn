@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://wbj56y3dfmtu"]
+
+[ext_resource type="Script" uid="uid://b7sxil2sl2s85" path="res://scripts/objects/route_segment.gd" id="1_xd0ei"]
+
+[sub_resource type="Curve2D" id="Curve2D_tn0nt"]
+
+[node name="RouteSegment" type="Path2D" unique_id=1627904555]
+curve = SubResource("Curve2D_tn0nt")
+script = ExtResource("1_xd0ei")
+
+[node name="RouteLine" type="Line2D" parent="." unique_id=1011209873]
+default_color = Color(3.946722e-06, 0.72293675, 0.2717789, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true

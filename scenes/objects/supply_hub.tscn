@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://0jd4dyuh4xyg"]
 
 [ext_resource type="Script" uid="uid://wwto822cluap" path="res://scripts/objects/supply_hub.gd" id="1_h5toe"]
-[ext_resource type="Texture2D" uid="uid://p4tywj6alfpe" path="res://assets/sprites/objects/SUPPLY HUB.svg" id="1_rij8j"]
+[ext_resource type="Texture2D" uid="uid://cqjefkdixk3xj" path="res://assets/sprites/objects/supplyhub.svg" id="2_h5toe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ol4vb"]
-size = Vector2(240, 304)
+size = Vector2(240, 192)
 
 [node name="SupplyHub" type="Area2D" unique_id=1183306678]
 script = ExtResource("1_h5toe")
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=601473558]
-texture = ExtResource("1_rij8j")
+texture = ExtResource("2_h5toe")
 
 [node name="InteractionArea" type="CollisionShape2D" parent="." unique_id=2026519343]
 shape = SubResource("RectangleShape2D_ol4vb")

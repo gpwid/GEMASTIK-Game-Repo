@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://ve4c787u33ew"]
+
+[ext_resource type="Texture2D" uid="uid://cgkxg7hjg6r1u" path="res://assets/sprites/objects/driver_card.svg" id="1_0l48q"]
+[ext_resource type="Script" uid="uid://dod5txgmdtroa" path="res://scripts/ui/vehicle_info_panel.gd" id="1_84gak"]
+[ext_resource type="Texture2D" uid="uid://bm70ime2tsuv7" path="res://assets/sprites/objects/cargo_food.svg" id="2_84gak"]
+[ext_resource type="Texture2D" uid="uid://fjxpvtl3krcq" path="res://assets/sprites/objects/cargo_medical.svg" id="3_bjvh4"]
+[ext_resource type="Texture2D" uid="uid://by5ggba2jgp5f" path="res://assets/sprites/objects/cargo_infrastructure.svg" id="4_qdliw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84gak"]
+bg_color = Color(0.3198, 0.3844433, 0.41, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.86094564, 0.95768875, 0.99999994, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.21568628)
+shadow_size = 1
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjvh4"]
+bg_color = Color(0.46816236, 0.5437109, 0.5768876, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.86094564, 0.95768875, 0.99999994, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.21568628)
+shadow_size = 1
+shadow_offset = Vector2(0, 5)
+
+[node name="VehicleInfoPanel" type="PanelContainer" unique_id=1809906835]
+custom_minimum_size = Vector2(350, 350)
+offset_right = 350.0
+offset_bottom = 350.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_84gak")
+script = ExtResource("1_84gak")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1862178237]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MainColumn" type="VBoxContainer" parent="MarginContainer" unique_id=1864015631]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderRow" type="HBoxContainer" parent="MarginContainer/MainColumn" unique_id=325289559]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VehicleIcon" type="TextureRect" parent="MarginContainer/MainColumn/HeaderRow" unique_id=1062785723]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VehicleNameLabel" type="Label" parent="MarginContainer/MainColumn/HeaderRow" unique_id=1531866638]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Truk 1"
+
+[node name="FlexibleSpacer" type="Control" parent="MarginContainer/MainColumn/HeaderRow" unique_id=773643879]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FuelBar" type="ProgressBar" parent="MarginContainer/MainColumn/HeaderRow" unique_id=1184653554]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="DriverRow" type="HBoxContainer" parent="MarginContainer/MainColumn" unique_id=914047433]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="DriverIcon" type="TextureRect" parent="MarginContainer/MainColumn/DriverRow" unique_id=1803160810]
+custom_minimum_size = Vector2(42, 42)
+custom_maximum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_0l48q")
+stretch_mode = 5
+
+[node name="DriverTextColumn" type="VBoxContainer" parent="MarginContainer/MainColumn/DriverRow" unique_id=1170316922]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DriverTitleLabel" type="Label" parent="MarginContainer/MainColumn/DriverRow/DriverTextColumn" unique_id=19373512]
+layout_mode = 2
+text = "Driver:"
+
+[node name="DriverNameLabel" type="Label" parent="MarginContainer/MainColumn/DriverRow/DriverTextColumn" unique_id=879780045]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Farhan Eka Yuda"
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/MainColumn" unique_id=1380704842]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status: Normal"
+
+[node name="CargoTitleLabel" type="Label" parent="MarginContainer/MainColumn" unique_id=1693408540]
+layout_mode = 2
+text = "Cargo"
+
+[node name="CargoPanel" type="PanelContainer" parent="MarginContainer/MainColumn" unique_id=1206877973]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bjvh4")
+
+[node name="Cargomargin" type="MarginContainer" parent="MarginContainer/MainColumn/CargoPanel" unique_id=176811818]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CargoRow" type="HBoxContainer" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin" unique_id=1729393242]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="FoodDisplay" type="VBoxContainer" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow" unique_id=1454076673]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FoodIcon" type="TextureRect" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/FoodDisplay" unique_id=809305061]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_84gak")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FoodCountLabel" type="Label" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/FoodDisplay" unique_id=1876877833]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0x"
+horizontal_alignment = 1
+
+[node name="MedicalDisplay" type="VBoxContainer" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow" unique_id=760841823]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MedicalIcon" type="TextureRect" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/MedicalDisplay" unique_id=796629430]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_bjvh4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MedicalCountLabel" type="Label" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/MedicalDisplay" unique_id=889366273]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0x"
+horizontal_alignment = 1
+
+[node name="InfrastructureDisplay" type="VBoxContainer" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow" unique_id=1287798406]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InfrastructureIcon" type="TextureRect" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/InfrastructureDisplay" unique_id=754691843]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_qdliw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfrastructureCountLabel" type="Label" parent="MarginContainer/MainColumn/CargoPanel/Cargomargin/CargoRow/InfrastructureDisplay" unique_id=1639793163]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0x"
+horizontal_alignment = 1
