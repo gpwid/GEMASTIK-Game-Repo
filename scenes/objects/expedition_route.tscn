@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bba6xfcmpqleg"]
+
+[ext_resource type="Script" uid="uid://5olono0rsipm" path="res://scripts/objects/expedition_route.gd" id="1_87trv"]
+
+[sub_resource type="Curve2D" id="Curve2D_rpkif"]
+
+[node name="ExpeditionRoute" type="Node" unique_id=1185850775]
+script = ExtResource("1_87trv")
+
+[node name="CombinedPath" type="Path2D" parent="." unique_id=971603760]
+curve = SubResource("Curve2D_rpkif")

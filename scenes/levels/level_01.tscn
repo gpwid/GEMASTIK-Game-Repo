@@ -5,10 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://0jd4dyuh4xyg" path="res://scenes/objects/supply_hub.tscn" id="2_i2aat"]
 [ext_resource type="PackedScene" uid="uid://b6xn2uiqjcppw" path="res://scenes/objects/village.tscn" id="3_2djvx"]
 [ext_resource type="PackedScene" uid="uid://d2qetmjnnau8x" path="res://scenes/objects/transit_hub.tscn" id="3_qdh5e"]
-[ext_resource type="PackedScene" uid="uid://b8b1g0hgfaucb" path="res://scenes/ui/vehicle_inventory.tscn" id="7_1ey3t"]
-[ext_resource type="Texture2D" uid="uid://cueokwrf76d50" path="res://assets/sprites/objects/truck_mini_icon.png" id="8_kfebt"]
-[ext_resource type="Script" uid="uid://dku583bjk3re2" path="res://scripts/ui/vehicle_inventory_entry.gd" id="8_r72dd"]
-[ext_resource type="Texture2D" uid="uid://gvft728vhnsg" path="res://assets/sprites/objects/boat_mini_icon.png" id="9_r72dd"]
+[ext_resource type="PackedScene" uid="uid://bba6xfcmpqleg" path="res://scenes/objects/expedition_route.tscn" id="6_50wog"]
+[ext_resource type="PackedScene" uid="uid://b8b1g0hgfaucb" path="res://scenes/ui/leader_roster.tscn" id="7_1ey3t"]
+[ext_resource type="Script" uid="uid://dku583bjk3re2" path="res://scripts/ui/leader_profile.gd" id="8_r72dd"]
 [ext_resource type="PackedScene" uid="uid://uvto0wf2h7vy" path="res://scenes/ui/game_hud.tscn" id="11_ijn0p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
@@ -22,17 +21,25 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="Resource" id="Resource_ijn0p"]
+[sub_resource type="Resource" id="Resource_0np5u"]
 script = ExtResource("8_r72dd")
-starting_count = 3
-icon = ExtResource("8_kfebt")
+leader_id = "1"
+leader_name = "Zidan Nugraha Rey"
+leader_color = Color(0.99994236, 0.4606411, 0.39641768, 1)
 metadata/_custom_type_script = "uid://dku583bjk3re2"
 
-[sub_resource type="Resource" id="Resource_jmes4"]
+[sub_resource type="Resource" id="Resource_ot4fj"]
 script = ExtResource("8_r72dd")
-transport_mode = 2
-starting_count = 3
-icon = ExtResource("9_r72dd")
+leader_id = "2"
+leader_name = "Zhidan Iannov Saaba"
+leader_color = Color(9.62615e-07, 0.70901763, 0.8300072, 1)
+metadata/_custom_type_script = "uid://dku583bjk3re2"
+
+[sub_resource type="Resource" id="Resource_q0bre"]
+script = ExtResource("8_r72dd")
+leader_id = "3"
+leader_name = "M. Nabil Alfathan"
+leader_color = Color(0.09803922, 0.96862745, 0.3529412, 1)
 metadata/_custom_type_script = "uid://dku583bjk3re2"
 
 [node name="Level01" type="Node2D" unique_id=2095256609]
@@ -86,7 +93,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
-[node name="TransportRoutes" type="Node" parent="." unique_id=1453631685]
+[node name="ExpeditionRoutes" parent="." unique_id=1185850775 instance=ExtResource("6_50wog")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2132739644]
 
@@ -208,7 +215,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "PILIH LEVEL LAIN"
 
-[node name="VehicleInventory" parent="UI" unique_id=1318327746 instance=ExtResource("7_1ey3t")]
+[node name="LeaderRoster" parent="UI" unique_id=1318327746 instance=ExtResource("7_1ey3t")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -220,7 +227,7 @@ offset_right = 0.0
 offset_bottom = 180.0
 grow_horizontal = 0
 grow_vertical = 2
-vehicle_entries = Array[ExtResource("8_r72dd")]([SubResource("Resource_ijn0p"), SubResource("Resource_jmes4")])
+leader_profiles = Array[ExtResource("8_r72dd")]([SubResource("Resource_0np5u"), SubResource("Resource_ot4fj"), SubResource("Resource_q0bre")])
 
 [node name="SustainTimer" type="Timer" parent="." unique_id=737803136]
 wait_time = 20.0

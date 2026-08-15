@@ -85,12 +85,12 @@ layout_mode = 2
 size_flags_vertical = 4
 show_percentage = false
 
-[node name="DriverRow" type="HBoxContainer" parent="MarginContainer/MainColumn" unique_id=914047433]
+[node name="LeaderRow" type="HBoxContainer" parent="MarginContainer/MainColumn" unique_id=914047433]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="DriverIcon" type="TextureRect" parent="MarginContainer/MainColumn/DriverRow" unique_id=1803160810]
+[node name="LeaderIcon" type="TextureRect" parent="MarginContainer/MainColumn/LeaderRow" unique_id=1803160810]
 custom_minimum_size = Vector2(42, 42)
 custom_maximum_size = Vector2(42, 42)
 layout_mode = 2
@@ -98,15 +98,15 @@ size_flags_vertical = 4
 texture = ExtResource("1_0l48q")
 stretch_mode = 5
 
-[node name="DriverTextColumn" type="VBoxContainer" parent="MarginContainer/MainColumn/DriverRow" unique_id=1170316922]
+[node name="LeaderTextColumn" type="VBoxContainer" parent="MarginContainer/MainColumn/LeaderRow" unique_id=1170316922]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="DriverTitleLabel" type="Label" parent="MarginContainer/MainColumn/DriverRow/DriverTextColumn" unique_id=19373512]
+[node name="LeaderTitleLabel" type="Label" parent="MarginContainer/MainColumn/LeaderRow/LeaderTextColumn" unique_id=19373512]
 layout_mode = 2
-text = "Driver:"
+text = "Expedition Leader:"
 
-[node name="DriverNameLabel" type="Label" parent="MarginContainer/MainColumn/DriverRow/DriverTextColumn" unique_id=879780045]
+[node name="LeaderNameLabel" type="Label" parent="MarginContainer/MainColumn/LeaderRow/LeaderTextColumn" unique_id=879780045]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Farhan Eka Yuda"

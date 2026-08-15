@@ -14,7 +14,7 @@ var fuel_fill_style: StyleBoxFlat = StyleBoxFlat.new()
 @onready var vehicle_icon: TextureRect = %VehicleIcon
 @onready var vehicle_name_label: Label = %VehicleNameLabel
 @onready var fuel_bar: ProgressBar = %FuelBar
-@onready var driver_name_label: Label = %DriverNameLabel
+@onready var leader_name_label: Label = %LeaderNameLabel
 @onready var status_label: Label = %StatusLabel
 @onready var food_count_label: Label = %FoodCountLabel
 @onready var medical_count_label: Label = %MedicalCountLabel
@@ -55,7 +55,7 @@ func update_display() -> void:
 
 	vehicle_icon.texture = selected_vehicle.vehicle_icon
 	vehicle_name_label.text = selected_vehicle.vehicle_name
-	driver_name_label.text = selected_vehicle.driver_name
+	leader_name_label.text = selected_vehicle.leader_name
 
 	fuel_bar.max_value = selected_vehicle.max_fuel
 	fuel_bar.value = selected_vehicle.current_fuel
@@ -76,7 +76,10 @@ func update_status() -> void:
 	elif (selected_vehicle.current_fuel <= selected_vehicle.red_fuel_threshold):
 		status_label.text = "Status: Konservasi"
 	else:
-		status_label.text = "Status: Normal"
+		status_label.text = str(
+			"Status: ",
+			selected_vehicle.expedition_status
+		)
 		
 
 func update_cargo_display() -> void:

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dqhb2rmh35xid"]
+
+[ext_resource type="StyleBox" uid="uid://c7l4v7qsy1ast" path="res://scenes/ui/token_glass.tres" id="1_aupt6"]
+[ext_resource type="StyleBox" uid="uid://d1sadboi0koi4" path="res://scenes/ui/token_glass_pressed.tres" id="2_ye8va"]
+[ext_resource type="StyleBox" uid="uid://cgrprpes1516a" path="res://scenes/ui/token_glass_hover.tres" id="3_dmh4b"]
+[ext_resource type="Script" uid="uid://m0ucq2yqp004" path="res://scripts/ui/leader_token.gd" id="4_sfbaj"]
+[ext_resource type="Texture2D" uid="uid://d357bfo6qptjb" path="res://assets/ui/worker_icon.svg" id="5_77ugm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8nus"]
+
+[node name="LeaderToken" type="Button" unique_id=1655876123]
+material = SubResource("ShaderMaterial_n8nus")
+custom_minimum_size = Vector2(86, 86)
+offset_right = 86.0
+offset_bottom = 86.0
+focus_mode = 0
+theme_override_styles/normal = ExtResource("1_aupt6")
+theme_override_styles/pressed = ExtResource("2_ye8va")
+theme_override_styles/hover = ExtResource("3_dmh4b")
+script = ExtResource("4_sfbaj")
+
+[node name="LeaderIcon" type="TextureRect" parent="." unique_id=973699641]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+texture = ExtResource("5_77ugm")
+expand_mode = 1
+stretch_mode = 5
