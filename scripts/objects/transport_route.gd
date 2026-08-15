@@ -11,6 +11,8 @@ var segments: Array[RouteSegment] = []
 var transport_mode: RouteSegment.TransportMode = RouteSegment.TransportMode.INVALID
 var vehicle_followers: Array[PathFollow2D] = []
 var vehicles_under_repair: int = 0
+var junction_offsets: Array[float] = []
+var junction_nodes: Array[Area2D] = []
 
 @export var vehicle_departure_interval: float = 1.0
 @export var turnaround_duration: float = 0.4
@@ -19,7 +21,9 @@ var vehicles_under_repair: int = 0
 @onready var combined_path: Path2D = $CombinedPath
 
 func _process(delta: float) -> void:
-	for follower in vehicle_followers:
+	var followers_snapshot: Array[PathFollow2D] = vehicle_followers.duplicate()
+
+	for follower in followers_snapshot:
 		if not is_instance_valid(follower):
 			continue
 		if follower.get_child_count() == 0:
@@ -37,12 +41,13 @@ func _process(delta: float) -> void:
 		var previous_progress: float = follower.progress
 		var effective_speed: float = vehicle.get_effective_travel_speed()
 
-		follower.progress += (effective_speed * vehicle.travel_direction * delta)
-
+		follower.progress += effective_speed * vehicle.travel_direction * delta
 		var traveled_distance: float = absf(follower.progress - previous_progress)
 
 		vehicle.consume_fuel(traveled_distance)
+		handle_crossed_junctions(vehicle, previous_progress, follower.progress)
 		vehicle.update_fuel_condition(delta)
+
 		if vehicle.is_broken_down:
 			continue
 			
@@ -101,8 +106,57 @@ func rebuild_combined_path() -> void:
 			new_combined_curve.add_point(combined_local_point)
 	
 	combined_path.curve = new_combined_curve
+	rebuild_junction_checkpoints()
 	print("[rebuild_combined_path:transport_route.gd]", name, " | Segments: ", segments.size(), " | Points: ", new_combined_curve.point_count, " | Length: ", new_combined_curve.get_baked_length())
+
+func rebuild_junction_checkpoints() -> void:
+	junction_offsets.clear()
+	junction_nodes.clear()
+
+	if segments.size() < 2:
+		return
+
+	for index in range(segments.size() - 1):
+		var segment: RouteSegment = segments[index]
+		var junction: Area2D = segment.end_point
+
+		if junction == null:
+			continue
+		if segment.curve == null or segment.curve.point_count == 0:
+			continue
+
+		var last_point_index: int = segment.curve.point_count - 1
+		var segment_local_position: Vector2 = segment.curve.get_point_position(last_point_index)
+		var global_position: Vector2 = segment.to_global(segment_local_position)
+		var combined_local_position: Vector2 = combined_path.to_local(global_position)
+
+		var junction_offset: float = combined_path.curve.get_closest_offset(
+			combined_local_position
+		)
+
+		junction_offsets.append(junction_offset)
+		junction_nodes.append(junction)
 	
+func handle_crossed_junctions(vehicle: TransportVehicle, previous_progress: float, current_progress: float) -> void:
+	for index in range(junction_offsets.size()):
+		var junction_offset: float = junction_offsets[index]
+
+		var crossed_forward: bool = (vehicle.travel_direction > 0.0 and previous_progress < junction_offset and current_progress >= junction_offset)
+
+		var crossed_backward: bool = (vehicle.travel_direction < 0.0 and previous_progress > junction_offset and current_progress <= junction_offset)
+
+		if not crossed_forward and not crossed_backward:
+			continue
+		var junction: Area2D = junction_nodes[index]
+
+		if junction.has_method("refuels_vehicle"):
+			var should_refuel: bool = junction.call("refuels_vehicle")
+
+			if should_refuel:
+				vehicle.refuel()
+				print(
+					"[handle_crossed_junctions:transport_route.gd] ", vehicle.vehicle_name, " mengisi minyak di ", junction.name)	
+
 func get_route_start_point() -> Area2D:
 	if segments.is_empty():
 		return null
@@ -239,12 +293,28 @@ func handle_vehicle_arrival(vehicle: TransportVehicle, arrived_at_end: bool) -> 
 		
 	if arrival_point.has_method("provide_cargo"):
 		var requested_amount: int = vehicle.get_remaining_capacity()
+
 		if requested_amount <= 0:
-			print("[handle_vehicle_arrival:transport_route.gd] Kendaraan dah penuh, Route: ", name, " Manifest: ", vehicle.cargo_manifest)
+			print("[handle_vehicle_arrival:transport_route.gd] ", "Kendaraan sudah penuh | Manifest: ", vehicle.cargo_manifest)
 			return
-		var provided_cargo: Array[int] = arrival_point.call("provide_cargo", requested_amount)
+
+		var preferred_types: Array[int] = []
+		var route_destination: Area2D = get_route_end_point()
+
+		if (route_destination != null and route_destination.has_method("get_requested_cargo")):
+			preferred_types = route_destination.call("get_requested_cargo")
+
+			for loaded_type in vehicle.cargo_manifest:
+				var requested_index: int = preferred_types.find(loaded_type)
+
+				if requested_index != -1:
+					preferred_types.remove_at(requested_index)
+
+		var provided_cargo: Array[int] = arrival_point.call("provide_cargo", requested_amount, preferred_types)
+
 		var remaining_cargo: Array[int] = vehicle.load_cargo_batch(provided_cargo)
-		print("[handle_vehicle_arrival:transport_route.gd] Route: ", name, " Source: ", arrival_point.name, " Dimuat: ", provided_cargo.size() - remaining_cargo.size(), " Manifest: ", vehicle.cargo_manifest)
+
+		print("[handle_vehicle_arrival:transport_route.gd] Route: ", name, " | Dimuat: ", provided_cargo.size() - remaining_cargo.size(), " | Manifest: ", vehicle.cargo_manifest)
 
 func has_active_vehicles() -> bool:
 	if vehicles_under_repair > 0:
@@ -280,12 +350,49 @@ func remove_last_segment(segment: RouteSegment) -> bool:
 	print("[remove_last_segment:transport_route.gd] ", "Segment dilepas: ", segment.name, " | Segment tersisa: ", segments.size())
 	return true
 
+func return_vehicle_cargo_to_origin(vehicle: TransportVehicle) -> bool:
+	if vehicle.cargo_manifest.is_empty():
+		return true
+
+	var route_origin: Area2D = get_route_start_point()
+
+	if route_origin == null:
+		return false
+
+	if route_origin is TransitHub:
+		var origin_hub: TransitHub = route_origin as TransitHub
+
+		if not origin_hub.transfers_cargo():
+			print("[return_vehicle_cargo_to_origin:transport_route.gd] ", origin_hub.name, " tidak dapat menyimpan cargo")
+			return false
+
+		if origin_hub.get_remaining_storage_capacity() < vehicle.get_cargo_count():
+			print("[return_vehicle_cargo_to_origin:transport_route.gd] ", "Gudang ", origin_hub.name, " tidak cukup")
+			return false
+
+		var returned_cargo: Array[int] = vehicle.unload_all_cargo()
+		origin_hub.store_cargo(returned_cargo)
+
+		print("[return_vehicle_cargo_to_origin:transport_route.gd] ", "Cargo dikembalikan ke ", origin_hub.name, ": ", returned_cargo)
+		return true
+
+	if route_origin.has_method("provide_cargo"):
+		var returned_cargo: Array[int] = vehicle.unload_all_cargo()
+		print("[return_vehicle_cargo_to_origin:transport_route.gd] ", "Cargo dikembalikan ke sumber utama: ", returned_cargo)
+		return true
+
+	return false
+
 func _on_vehicle_return_requested(vehicle: TransportVehicle, follower: PathFollow2D) -> void:
 	if not is_instance_valid(vehicle):
 		return
 	if not is_instance_valid(follower):
 		return
 	if vehicle.get_parent() != follower:
+		return
+		
+	if not return_vehicle_cargo_to_origin(vehicle):
+		print("[_on_vehicle_return_requested:transport_route.gd] ", "Pengembalian ditolak karena cargo tidak dapat disimpan")
 		return
 
 	vehicle_followers.erase(follower)
@@ -325,6 +432,7 @@ func _on_vehicle_broken_down(vehicle: TransportVehicle, follower: PathFollow2D) 
 		return
 	follower.queue_free()
 	await get_tree().create_timer(repair_time).timeout
+	vehicles_under_repair = maxi(vehicles_under_repair - 1, 0)
 	vehicle_returned.emit(transport_mode)
 	print("[_on_vehicle_broken_down:transport_route.gd] ", broken_vehicle_name, " selesai diperbaiki")
 	

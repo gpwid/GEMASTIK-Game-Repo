@@ -46,22 +46,6 @@ func create_vehicle_token(stack: Control, entry: VehicleInventoryEntry, index: i
 	token.vehicle_drag_started.connect(_on_token_drag_started)
 	token.vehicle_drag_released.connect(_on_token_drag_released)
 	
-func create_token_stack(stack: Control, amount: int, mode: RouteSegment.TransportMode, icon: Texture2D) -> void:
-	for index in range(amount):
-		var token: VehicleToken = (VEHICLE_TOKEN_SCENE.instantiate() as VehicleToken)
-		if token == null:
-			continue
-
-		token.transport_mode = mode
-		token.icon_texture = icon
-		token.name = str(RouteSegment.TransportMode.keys()[mode], "Token", index + 1)
-
-		stack.add_child(token)
-		token.vehicle_drag_started.connect(_on_token_drag_started)
-		token.vehicle_drag_released.connect(_on_token_drag_released)
-
-	layout_stack(stack)
-	
 func layout_stack(stack: Control) -> void:
 	var tokens: Array[VehicleToken] = []
 	for child in stack.get_children():
@@ -122,15 +106,6 @@ func restore_vehicle(transport_mode: RouteSegment.TransportMode) -> bool:
 	print("[restore_vehicle:vehicle_inventory.gd] Mode: ", RouteSegment.TransportMode.keys()[transport_mode], " | Tersedia: ", stack.get_child_count())
 	return true	
 	
-func register_stack_tokens(stack: Control) -> void:
-	for child in stack.get_children():
-		var token: VehicleToken = child as VehicleToken
-
-		if token == null:
-			continue
-
-		token.vehicle_drag_started.connect(_on_token_drag_started)
-		token.vehicle_drag_released.connect(_on_token_drag_released)
 		
 func _on_token_drag_started(token: VehicleToken) -> void:
 	token_drag_started.emit(token)

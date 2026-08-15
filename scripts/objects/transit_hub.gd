@@ -41,16 +41,16 @@ func _ready() -> void:
 	add_to_group("transit_hubs")
 	update_hub_visual()
 	
-func update_hub_visual() -> void:
-	land_visual.visible = not is_port
-	port_visual.visible = is_port
-
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			connection_drag_started.emit(self)
 		else:
 			connection_drag_finished.emit(self)
+
+func update_hub_visual() -> void:
+	land_visual.visible = not is_port
+	port_visual.visible = is_port
 
 func get_remaining_storage_capacity() -> int:
 	var max_capacity: int = cargo_storage_capacity

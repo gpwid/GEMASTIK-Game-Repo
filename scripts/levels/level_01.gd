@@ -96,12 +96,13 @@ func finish_connection(end_node: Area2D, target_global_position: Vector2) -> voi
 	var start_global_position: Vector2 = route_preview.to_global(route_preview.get_point_position(0))
 	var end_global_position: Vector2 = target_global_position
 	
-	if connection_start_node is TransitHub:
+	if connection_start_node is TransitHub and mode == RouteSegment.TransportMode.TRUCK:
 		var start_hub: TransitHub = connection_start_node as TransitHub
-		if mode == RouteSegment.TransportMode.SHIP:
-			start_global_position = start_hub.ship_dock.global_position
-		else:
-			start_global_position = start_hub.truck_stop.global_position	
+
+		if not start_hub.is_port and not can_extend_route_from(start_hub, mode):
+			print("[finish_connection:level_01.gd] Transit Hub daratan hanya boleh memperpanjang rute darat yang berakhir di hub tersebut")
+			cancel_route_drawing()
+			return
 			
 	if end_node is TransitHub:
 		var end_hub: TransitHub = end_node as TransitHub
@@ -136,7 +137,7 @@ func finish_connection(end_node: Area2D, target_global_position: Vector2) -> voi
 	$Routes.add_child(new_segment, true)
 	register_segment(new_segment)
 	created_segments.append(new_segment)
-	game_hud.set_can_undo(true)
+	update_undo_availability()
 	route_segment_count += 1
 	game_hud.set_route_count(route_segment_count)
 	if end_node is TransitHub:
@@ -280,6 +281,17 @@ func recalculate_supply_network() -> void:
 		elif reachable_node.has_method("set_route_connected"):
 			reachable_node.call("set_route_connected")
 
+func update_undo_availability() -> void:
+	var last_segment: RouteSegment = get_last_created_segment()
+	var can_undo: bool = false
+
+	if is_instance_valid(last_segment):
+		var parent_route: TransportRoute = (last_segment.parent_transport_route)
+
+		can_undo = (is_instance_valid(parent_route) and not parent_route.has_active_vehicles())
+
+	game_hud.set_can_undo(can_undo)
+
 func undo_last_route() -> void:
 	var last_segment: RouteSegment = get_last_created_segment()
 
@@ -300,7 +312,7 @@ func undo_last_route() -> void:
 		return
 
 	created_segments.pop_back()
-	game_hud.set_can_undo(not created_segments.is_empty())
+	update_undo_availability()
 	game_hud.hide_vehicle_info()
 	route_segment_count = maxi(route_segment_count - 1, 0)
 	game_hud.set_route_count(route_segment_count)
@@ -312,6 +324,14 @@ func undo_last_route() -> void:
 	recalculate_supply_network()
 
 	print("[undo_last_route:level_01.gd] ", "Rute berhasil dihapus | Tersisa: ", route_segment_count)
+
+func can_extend_route_from(start_node: Area2D, mode: RouteSegment.TransportMode) -> bool:
+	for transport_route in transport_routes:
+		if transport_route.transport_mode != mode:
+			continue
+		if transport_route.get_route_end_point() == start_node:
+			return true
+	return false
 
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false
@@ -380,6 +400,7 @@ func _on_vehicle_token_drag_released(token: VehicleToken) -> void:
 	if vehicle_installed:
 		print("[vehicle_drop:level_01.gd] Token digunakan pada ", target_route.name)
 		vehicle_inventory.consume_token(token)
+		update_undo_availability()
 	else:
 		print("[vehicle_drop:level_01.gd] Kendaraan gagal dipasang pada ", target_route.name)
 		token.return_to_inventory()
@@ -399,6 +420,7 @@ func _on_transport_route_vehicle_returned(transport_mode: RouteSegment.Transport
 	var was_restored: bool = vehicle_inventory.restore_vehicle(transport_mode)
 	if not was_restored:
 		print("Kendaraan gagal dikembalikan ke inventory: ", RouteSegment.TransportMode.keys()[transport_mode])
+	update_undo_availability()
 	
 func _on_transport_route_vehicle_selected(vehicle: TransportVehicle) -> void:
 	if not is_instance_valid(vehicle):

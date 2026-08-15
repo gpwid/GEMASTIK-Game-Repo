@@ -21,12 +21,16 @@ func supports_ship() -> bool:
 func refuels_vehicle() -> bool:
 	return true
 
-func provide_cargo(requested_amount: int) -> Array[int]:
+func provide_cargo(requested_amount: int, preferred_types: Array[int] = []) -> Array[int]:
 	var provided_cargo: Array[int] = []
-	for _i in range(requested_amount):
+	for cargo_type in preferred_types:
+		if provided_cargo.size() >= requested_amount:
+			break
+		provided_cargo.append(cargo_type)
+	while provided_cargo.size() < requested_amount:
 		provided_cargo.append(next_cargo_type)
-		next_cargo_type = (next_cargo_type + 1) % CargoTypes.Type.keys().size()		
-	print("[provide_cargo:supply_hub.gd] Produksi: ", provided_cargo, " Tipe selanjutnya: ", next_cargo_type)
+		next_cargo_type = ((next_cargo_type + 1) % CargoTypes.Type.size())
+
+	print("[provide_cargo:supply_hub.gd] Produksi: ", provided_cargo)
 	return provided_cargo
-	
 	

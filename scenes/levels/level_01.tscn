@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://0jd4dyuh4xyg" path="res://scenes/objects/supply_hub.tscn" id="2_i2aat"]
 [ext_resource type="PackedScene" uid="uid://b6xn2uiqjcppw" path="res://scenes/objects/village.tscn" id="3_2djvx"]
 [ext_resource type="PackedScene" uid="uid://d2qetmjnnau8x" path="res://scenes/objects/transit_hub.tscn" id="3_qdh5e"]
-[ext_resource type="PackedScene" uid="uid://bba6xfcmpqleg" path="res://scenes/objects/transport_route.tscn" id="6_50wog"]
 [ext_resource type="PackedScene" uid="uid://b8b1g0hgfaucb" path="res://scenes/ui/vehicle_inventory.tscn" id="7_1ey3t"]
 [ext_resource type="Texture2D" uid="uid://cueokwrf76d50" path="res://assets/sprites/objects/truck_mini_icon.png" id="8_kfebt"]
 [ext_resource type="Script" uid="uid://dku583bjk3re2" path="res://scripts/ui/vehicle_inventory_entry.gd" id="8_r72dd"]
@@ -87,7 +86,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
-[node name="TransportRoutes" parent="." unique_id=1185850775 instance=ExtResource("6_50wog")]
+[node name="TransportRoutes" type="Node" parent="." unique_id=1453631685]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2132739644]
 
@@ -232,13 +231,9 @@ one_shot = true
 [connection signal="village_failed" from="MapObjects/VillageA" to="." method="_on_village_a_village_failed"]
 [connection signal="route_drag_finished" from="MapObjects/VillageB" to="." method="_on_village_b_route_drag_finished"]
 [connection signal="village_failed" from="MapObjects/VillageB" to="." method="_on_village_b_village_failed"]
-[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_land_a_connection_drag_finished"]
 [connection signal="connection_drag_finished" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_connection_drag_finished"]
-[connection signal="connection_drag_started" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_land_a_connection_drag_started"]
 [connection signal="connection_drag_started" from="MapObjects/TransitHubs/TransitLandA" to="." method="_on_transit_connection_drag_started"]
-[connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortA" to="." method="_on_port_a_connection_drag_finished"]
 [connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortA" to="." method="_on_transit_connection_drag_finished"]
-[connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortA" to="." method="_on_port_a_connection_drag_started"]
 [connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortA" to="." method="_on_transit_connection_drag_started"]
 [connection signal="connection_drag_finished" from="MapObjects/TransitHubs/PortB" to="." method="_on_transit_connection_drag_finished"]
 [connection signal="connection_drag_started" from="MapObjects/TransitHubs/PortB" to="." method="_on_transit_connection_drag_started"]
