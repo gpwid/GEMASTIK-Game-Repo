@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h2e"]
 size = Vector2(80, 56)
 
-[node name="Village" type="Area2D" unique_id=1158911162]
+[node name="Village" type="Area2D" unique_id=1158911162 groups=["villages"]]
 script = ExtResource("1_5lu8w")
 food_icon = ExtResource("4_331xm")
 medical_icon = ExtResource("3_arnhj")
@@ -33,6 +33,12 @@ tint_progress = Color(0.79, 0.55300003, 0, 1)
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=676704296]
 scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_arnhj")
+
+[node name="RouteOutlineSprite" type="Sprite2D" parent="." unique_id=649679041]
+visible = false
+z_index = -1
+scale = Vector2(0.318, 0.318)
 texture = ExtResource("6_arnhj")
 
 [node name="RequestSlots" type="Node2D" parent="." unique_id=1371114503]

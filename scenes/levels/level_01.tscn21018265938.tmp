@@ -10,75 +10,41 @@
 [ext_resource type="PackedScene" uid="uid://b8b1g0hgfaucb" path="res://scenes/ui/leader_roster.tscn" id="7_1ey3t"]
 [ext_resource type="Script" uid="uid://ctngbsq76hxng" path="res://scripts/levels/camera_controller.gd" id="7_jmes4"]
 [ext_resource type="Script" uid="uid://dku583bjk3re2" path="res://scripts/ui/leader_profile.gd" id="8_r72dd"]
-[ext_resource type="PackedScene" uid="uid://wwykjr0ayo08" path="res://scenes/ui/tutorial_overlay.tscn" id="9_jmes4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/tutorial_overlay.tscn" id="9_jmes4"]
 [ext_resource type="Script" uid="uid://cfeuvjn2rolxk" path="res://scripts/ui/tutorial_step.gd" id="10_tyxjt"]
 [ext_resource type="PackedScene" uid="uid://uvto0wf2h7vy" path="res://scenes/ui/game_hud.tscn" id="11_ijn0p"]
-[ext_resource type="StyleBox" uid="uid://xkaake5sy50d" path="res://scenes/ui/button1.tres" id="12_cwffn"]
-[ext_resource type="StyleBox" uid="uid://cfpldc73yspxo" path="res://scenes/ui/button1_pressed.tres" id="13_e6lid"]
-[ext_resource type="StyleBox" uid="uid://do7kvj4upufrt" path="res://scenes/ui/button1_hover.tres" id="14_3g50r"]
 
 [sub_resource type="Resource" id="Resource_tyxjt"]
 script = ExtResource("10_tyxjt")
-title = "Selamat Datang, Operator"
-description = "Halo karyawan baru! Selamat datang di PASOKAN, sofware andalan kami dalam mengirim pasokan suplai ke berbagai wilayah tertinggal di Indonesia!"
+title = "Supply Hub"
+description = "The heart of the system. Suplai tidak akan muncul tanpa sebuah supply hub. Tarik mouse dari bangunan ini menuju Transit Hub atau Desa."
+target_group = &"tutorial_supply_hub"
+world_highlight_size = Vector2(190, 170)
 metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
 
 [sub_resource type="Resource" id="Resource_07lms"]
 script = ExtResource("10_tyxjt")
-title = "Selamat Datang, Operator"
-description = "Kamu adalah pegawai terbaru kami. Tugas kamu? Simpel. Mengarahkan rute-rute untuk \"pasukan\" kita agar mereka bisa mengantarkan \"pasokan\" ke desa-desa yang membutuhkannya! (heh)"
+title = "Transit Hub"
+description = "Transit Hub menghubungkan perjalanan darat dan laut. Pelabuhan memungkinkan ekspedisi berganti dari truk menjadi kapal. Gunakan ini ketika jangkauan kendaraan mu tidak sampai atau ingin mengirim suplai keluar pulau!"
+target_group = &"tutorial_transit_hub"
+world_highlight_size = Vector2(170, 170)
 metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
 
 [sub_resource type="Resource" id="Resource_gi8m4"]
 script = ExtResource("10_tyxjt")
-title = "Cukup Perkenalan"
-description = "Tanpa basa-basi, aku langsung tunjukkin saja bagaimana cara kerja perangkat ini."
+title = "Kebutuhan Desa"
+description = "Akhiri rute di desa. Ikon di samping desa menunjukkan kebutuhan mereka dari bahan pangan, medis, dan infrastruktur. Jika permintaan di anggurin, maka desa akan memasuki fase krisis yang bisa menuju ke kehancuran desa tersebut.
+"
+target_group = &"tutorial_village"
+world_highlight_size = Vector2(190, 170)
 metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
 
 [sub_resource type="Resource" id="Resource_3g50r"]
 script = ExtResource("10_tyxjt")
-title = "Supply Hub"
-description = "Jantung hati operasi kita. Semua pasokan berasal dari Supply Hub. Gunakan mouse kamu dan tarik dari bangunan ini menuju Transit Hub atau desa untuk mulai membuat rute."
-target_group = &"tutorial_supply_hub"
-metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
-
-[sub_resource type="Resource" id="Resource_iu1m7"]
-script = ExtResource("10_tyxjt")
-title = "Transit... Hub?"
-description = "Iyup! Transit Hub. Transit Hub menghubungkan perjalanan darat dan laut. Pelabuhan memungkinkan ekspedisi berganti dari truk menjadi kapal. Gunakan mereka jika desa berada diluar jangkauan kendaraan kamu atau desa jangkauan kamu beda pulau!"
-target_group = &"tutorial_transit_hub"
-metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
-
-[sub_resource type="Resource" id="Resource_cywot"]
-script = ExtResource("10_tyxjt")
-title = "Desa?"
-description = "Iyap! Desa-desa ini sangat membutuhkan bantuan mu. Oleh karena itu buatlah rute ke semua desa di peta. Ikon di samping desa menunjukkan pangan, medis, dan infrastruktur yang sedang dibutuhkan. Jika kamu tidak memenuhi kebutuhan mereka atau membiarkan permintaan mereka menumpuk, desa akan memasuki mode krisis dan berpotensi untuk hancur dan ditelantarkan."
-target_group = &"tutorial_village"
-metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
-
-[sub_resource type="Resource" id="Resource_vrcmr"]
-script = ExtResource("10_tyxjt")
 title = "Mulai Ekspedisi"
-description = "Rute nya masih kosong setelah dibuat. Lihat lah di panel kanan mu! Itu adalah \"pasukan\" mu di lapangan. Tarik icon mereka dan seret ke rute yang ingin kamu tugaskan. Satu rute bisa menampung banyak kendaraan, namun kita tidak punya banyak personil jadi gunakan sebijak mungkin!
-
-Jika kamu ingin membatalkan personil, cukup klik kanan pada ikon kendaraan nantinya."
+description = "Rute masih kosong setelah dibuat. Tarik icon pemimpin ekspedisi dari panel kanan ke garis rute yang di inginkan untuk memulai perjalanan!"
 target_group = &"tutorial_leader_roster"
-metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
-
-[sub_resource type="Resource" id="Resource_svp4f"]
-script = ExtResource("10_tyxjt")
-title = "HUD"
-description = "Kamu bisa melihat informasi mengenai progress mu dan tombol untuk menjeda permainan, mempercepat permainan, kembali ke menu awal, dan membatalkan rute terakhir."
-target_group = &"tutorial_top_bar"
-metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
-
-[sub_resource type="Resource" id="Resource_1b0o8"]
-script = ExtResource("10_tyxjt")
-title = "Last but not least..."
-description = "Gunakan mouse kiri untuk menggeser map, dan scroll wheel mouse untuk zoom in/out! 
-
-Selamat bekerja!"
-target_group = &"tutorial_hud"
+world_highlight_size = Vector2(190, 170)
 metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
@@ -247,17 +213,15 @@ layer = 10
 [node name="UI" type="CanvasLayer" parent="UILayer" unique_id=2132739644]
 
 [node name="TutorialOverlay" parent="UILayer/UI" unique_id=1941862392 instance=ExtResource("9_jmes4")]
-visible = false
-steps = Array[ExtResource("10_tyxjt")]([SubResource("Resource_tyxjt"), SubResource("Resource_07lms"), SubResource("Resource_gi8m4"), SubResource("Resource_3g50r"), SubResource("Resource_iu1m7"), SubResource("Resource_cywot"), SubResource("Resource_vrcmr"), SubResource("Resource_svp4f"), SubResource("Resource_1b0o8")])
+steps = Array[ExtResource("10_tyxjt")]([SubResource("Resource_tyxjt"), SubResource("Resource_07lms"), SubResource("Resource_gi8m4"), SubResource("Resource_3g50r")])
 
-[node name="GameHud" parent="UILayer/UI" unique_id=257253525 groups=["tutorial_hud"] instance=ExtResource("11_ijn0p")]
+[node name="GameHud" parent="UILayer/UI" unique_id=257253525 instance=ExtResource("11_ijn0p")]
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="TopBar" parent="UILayer/UI/GameHud/ScreenMargin/ScreenColumn" parent_id_path=PackedInt32Array(257253525, 951860311) index="0" unique_id=1570169896 groups=["tutorial_top_bar"]]
-
 [node name="GameOverScreen" type="ColorRect" parent="UILayer/UI" unique_id=459150233]
 process_mode = 2
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -305,28 +269,13 @@ process_mode = 3
 custom_minimum_size = Vector2(240, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
 text = "COBA LAGI"
 
 [node name="GameOverLevelSelectButton" type="Button" parent="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=86385600]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
 text = "PILIH LEVEL LAIN"
-
-[node name="MainMenuButton" type="Button" parent="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1085755990]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
-text = "MAIN MENU"
 
 [node name="VictoryScreen" type="ColorRect" parent="UILayer/UI" unique_id=91111097]
 process_mode = 2
@@ -373,60 +322,17 @@ theme_override_font_sizes/font_size = 28
 text = "Seluruh desa berhasil dipertahankan"
 horizontal_alignment = 1
 
-[node name="VictoryDayLabel" type="Label" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=380789796]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Seluruh desa berhasil dipertahankan"
-horizontal_alignment = 1
-
-[node name="VictoryTimeLabel" type="Label" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=465115449]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Seluruh desa berhasil dipertahankan"
-horizontal_alignment = 1
-
-[node name="VictoryLogisticsLabel" type="Label" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1272275265]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Seluruh desa berhasil dipertahankan"
-horizontal_alignment = 1
-
-[node name="VictoryRouteLabel" type="Label" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1385580547]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Seluruh desa berhasil dipertahankan"
-horizontal_alignment = 1
-
 [node name="ReplayButton" type="Button" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1591014191]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
 text = "MAIN ULANG"
 
-[node name="LevelSelectionButton" type="Button" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=259052972]
+[node name="GameOverLevelSelectButton2" type="Button" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=259052972]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
 text = "PILIH LEVEL LAIN"
-
-[node name="MainMenuButton" type="Button" parent="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1238169073]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = ExtResource("12_cwffn")
-theme_override_styles/pressed = ExtResource("13_e6lid")
-theme_override_styles/hover = ExtResource("14_3g50r")
-text = "MAIN MENU"
 
 [node name="LeaderRoster" parent="UILayer/UI" unique_id=1318327746 groups=["tutorial_leader_roster"] instance=ExtResource("7_1ey3t")]
 anchors_preset = 6
@@ -445,9 +351,5 @@ leader_profiles = Array[ExtResource("8_r72dd")]([SubResource("Resource_0np5u"), 
 [connection signal="timeout" from="SustainTimer" to="." method="_on_sustain_timer_timeout"]
 [connection signal="pressed" from="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GameOverLevelSelectButton" to="." method="_on_level_selection_button_pressed"]
-[connection signal="pressed" from="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
-[connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelSelectionButton" to="." method="_on_level_selection_button_pressed"]
-[connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-
-[editable path="UILayer/UI/GameHud"]
+[connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GameOverLevelSelectButton2" to="." method="_on_level_selection_button_pressed"]

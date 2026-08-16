@@ -1,9 +1,6 @@
 class_name ExpeditionRoute
 extends Node
 
-## Satu rute multimoda linear dari Supply Hub sampai satu Village.
-## Nama class dipertahankan agar transport_route.tscn lama tetap bekerja.
-
 signal leader_returned(
 	leader_id: String,
 	leader_name: String,
@@ -28,6 +25,7 @@ var assigned_leaders: Array[ExpeditionLeader] = []
 @export var reservation_retry_interval: float = 0.5
 @export var turnaround_duration: float = 0.4
 @export var drop_detection_radius: float = 48.0
+@export var drop_highlight_width_addition: float = 6.0
 
 @onready var combined_path: Path2D = $CombinedPath
 
@@ -68,6 +66,8 @@ func add_segment(segment: RouteSegment) -> bool:
 	update_route_visual()
 	return true
 
+func can_be_deleted() -> bool:
+	return assigned_leaders.is_empty()
 
 func is_complete() -> bool:
 	var start_point := get_route_start_point()
@@ -96,12 +96,22 @@ func get_route_end_point() -> Area2D:
 
 
 func get_distance_to_route(world_position: Vector2) -> float:
-	if combined_path.curve == null or combined_path.curve.point_count < 2:
-		return INF
+	var closest_distance: float = INF
 
-	var local_position := combined_path.to_local(world_position)
-	var closest_position := combined_path.curve.get_closest_point(local_position)
-	return local_position.distance_to(closest_position)
+	for segment in segments:
+		if not is_instance_valid(segment):
+			continue
+
+		var distance := segment.get_distance_to_visual_line(
+			world_position
+		)
+
+		closest_distance = minf(
+			closest_distance,
+			distance
+		)
+
+	return closest_distance
 
 
 func rebuild_combined_path() -> void:
@@ -135,12 +145,93 @@ func rebuild_combined_path() -> void:
 
 func update_route_visual() -> void:
 	var is_active := not assigned_leaders.is_empty()
-	var displayed_color := route_color if is_active else inactive_route_color
+	var displayed_color := inactive_route_color
+
+	if is_active:
+		var primary_leader: ExpeditionLeader = assigned_leaders.front()
+		displayed_color = primary_leader.leader_color
+
+	var updated_nodes: Dictionary = {}
 
 	for segment in segments:
-		if is_instance_valid(segment):
-			segment.set_route_visual(displayed_color, is_active)
+		if not is_instance_valid(segment):
+			continue
 
+		segment.set_route_visual(displayed_color, is_active)
+
+		var route_nodes: Array[Area2D] = [
+			segment.start_point,
+			segment.end_point,
+		]
+
+		for route_node in route_nodes:
+			if not is_instance_valid(route_node):
+				continue
+			if updated_nodes.has(route_node):
+				continue
+
+			update_node_route_outline(
+				route_node,
+				displayed_color,
+				is_active
+			)
+
+			updated_nodes[route_node] = true
+
+func set_drop_highlight(is_highlighted: bool) -> void:
+	for segment in segments:
+		if is_instance_valid(segment):
+			segment.set_drop_highlight(is_highlighted)
+
+func update_node_route_outline(
+	route_node: Area2D,
+	displayed_color: Color,
+	is_active: bool
+) -> void:
+	if not is_instance_valid(route_node):
+		return
+
+	var outline_sprite := route_node.get_node_or_null(
+		"RouteOutlineSprite"
+	) as Sprite2D
+
+	if outline_sprite == null:
+		return
+
+	var stored_colors_variant: Variant = route_node.get_meta(
+		"active_expedition_route_colors",
+		{}
+	)
+
+	var active_route_colors: Dictionary = {}
+
+	if stored_colors_variant is Dictionary:
+		active_route_colors = stored_colors_variant
+
+	var route_id: int = get_instance_id()
+
+	if is_active:
+		active_route_colors[route_id] = displayed_color
+	else:
+		active_route_colors.erase(route_id)
+
+	route_node.set_meta(
+		"active_expedition_route_colors",
+		active_route_colors
+	)
+
+	outline_sprite.visible = not active_route_colors.is_empty()
+
+	if active_route_colors.is_empty():
+		return
+
+	if active_route_colors.size() == 1:
+		var route_color := (
+			active_route_colors.values()[0] as Color
+		)
+		outline_sprite.self_modulate = route_color.lightened(0.15)
+	else:
+		outline_sprite.self_modulate = Color.WHITE
 
 func try_assign_leader(
 	leader_id: String,
@@ -444,6 +535,7 @@ func _spawn_vehicle_for_current_segment(
 	follower.loop = false
 	follower.rotates = true
 	segment.add_child(follower)
+	follower.v_offset = segment.visual_lane_offset
 	follower.progress_ratio = progress_ratio
 
 	var vehicle := vehicle_scene.instantiate() as TransportVehicle

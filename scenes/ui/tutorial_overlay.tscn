@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://wwykjr0ayo08"]
+
+[ext_resource type="Script" uid="uid://dfysqp617gmvb" path="res://scripts/ui/tutorial_overlay.gd" id="1_overlay"]
+[ext_resource type="StyleBox" uid="uid://de80ddpc4m8fr" path="res://scenes/ui/button.tres" id="2_on1hl"]
+[ext_resource type="StyleBox" uid="uid://xkaake5sy50d" path="res://scenes/ui/button1.tres" id="3_4v1gd"]
+[ext_resource type="StyleBox" uid="uid://cfpldc73yspxo" path="res://scenes/ui/button1_pressed.tres" id="4_et6cr"]
+[ext_resource type="StyleBox" uid="uid://do7kvj4upufrt" path="res://scenes/ui/button1_hover.tres" id="5_d555y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxHighlight"]
+bg_color = Color(0.1, 0.85, 1, 0.08)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.55, 0.95, 1, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="TutorialOverlay" type="Control" unique_id=286491514]
+process_mode = 3
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_overlay")
+
+[node name="DimTop" type="ColorRect" parent="." unique_id=1235896621]
+unique_name_in_owner = true
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.015, 0.035, 0.05, 0.78)
+
+[node name="DimBottom" type="ColorRect" parent="." unique_id=336964608]
+unique_name_in_owner = true
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.015, 0.035, 0.05, 0.78)
+
+[node name="DimLeft" type="ColorRect" parent="." unique_id=1897377050]
+unique_name_in_owner = true
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.015, 0.035, 0.05, 0.78)
+
+[node name="DimRight" type="ColorRect" parent="." unique_id=1608089176]
+unique_name_in_owner = true
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.015, 0.035, 0.05, 0.78)
+
+[node name="HighlightFrame" type="Panel" parent="." unique_id=992199102]
+unique_name_in_owner = true
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxHighlight")
+
+[node name="SafeMargin" type="MarginContainer" parent="." unique_id=249526898]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="TutorialColumn" type="VBoxContainer" parent="SafeMargin" unique_id=1751069598]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelSpacer" type="Control" parent="SafeMargin/TutorialColumn" unique_id=1052994616]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PanelCenter" type="CenterContainer" parent="SafeMargin/TutorialColumn" unique_id=1208477093]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TutorialPanel" type="PanelContainer" parent="SafeMargin/TutorialColumn/PanelCenter" unique_id=610487062]
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_on1hl")
+
+[node name="PanelMargin" type="MarginContainer" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel" unique_id=705187811]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin" unique_id=1031914438]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StepCounter" type="Label" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content" unique_id=1736438763]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 / 4"
+
+[node name="TitleLabel" type="Label" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content" unique_id=2068721053]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Tutorial"
+
+[node name="DescriptionLabel" type="Label" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content" unique_id=1887159548]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 70)
+layout_mode = 2
+text = "Petunjuk tutorial."
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content" unique_id=1932750979]
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content/Buttons" unique_id=189685385]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_4v1gd")
+theme_override_styles/pressed = ExtResource("4_et6cr")
+theme_override_styles/hover = ExtResource("5_d555y")
+text = "Lewati"
+
+[node name="ButtonSpacer" type="Control" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content/Buttons" unique_id=86337921]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="NextButton" type="Button" parent="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content/Buttons" unique_id=1676854740]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_4v1gd")
+theme_override_styles/pressed = ExtResource("4_et6cr")
+theme_override_styles/hover = ExtResource("5_d555y")
+text = "Lanjut"
+
+[connection signal="pressed" from="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content/Buttons/SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="SafeMargin/TutorialColumn/PanelCenter/TutorialPanel/PanelMargin/Content/Buttons/NextButton" to="." method="_on_next_button_pressed"]

@@ -22,7 +22,6 @@ var crisis_level: float = 0.0
 @export var crisis_rise_per_second: float = 10.0
 @export var island_id: int = 0
 @export var is_coastal: bool = false
-@export var sustaining_request_limit: int = 2
 @export var food_icon: Texture2D
 @export var medical_icon: Texture2D
 @export var infrastructure_icon: Texture2D
@@ -32,9 +31,14 @@ var crisis_level: float = 0.0
 @onready var full_queue_timer: Timer = $FullQueueTimer
 @onready var failure_timer: Timer = $FailureTimer
 @onready var crisis_gauge: TextureProgressBar = $CrisisGauge
+@onready var village_visual: Sprite2D = $Visual
+@onready var route_outline_sprite: Sprite2D = $RouteOutlineSprite
 
 
 func _ready() -> void:
+	route_outline_sprite.scale = village_visual.scale * 1.02
+	route_outline_sprite.position = village_visual.position
+	route_outline_sprite.rotation = village_visual.rotation
 	update_request_display()
 
 
@@ -61,14 +65,14 @@ func _process(delta: float) -> void:
 
 
 func can_accept_route() -> bool:
-	return not has_supply_route and not is_failed
+	return not is_failed
 
 
 func is_self_sustaining() -> bool:
 	return (
 		has_supply_route
 		and has_received_valid_delivery
-		and request_count <= sustaining_request_limit
+		and request_count < CARGO_MAX_CAPACITY
 		and not is_crisis_active
 		and not is_failure_countdown_active
 		and not is_failed

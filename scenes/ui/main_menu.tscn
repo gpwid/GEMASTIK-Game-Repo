@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://dvac8wqrvcfj5"]
 
-[ext_resource type="Script" uid="uid://bsfairm4avf8c" path="res://scripts/ui/main_menu.gd" id="1_btxxm"]
+[ext_resource type="Script" uid="uid://b517jaabpg1sj" path="res://scripts/ui/main_menu.gd" id="1_btxxm"]
 [ext_resource type="Texture2D" uid="uid://258glpmpc5j7" path="res://assets/ui/background_blur_mainmenu.png" id="1_fe2o3"]
 [ext_resource type="Texture2D" uid="uid://bej4cefocbx40" path="res://assets/ui/day_icon.svg" id="3_uhagc"]
 [ext_resource type="Texture2D" uid="uid://bwwrp3t1c8msi" path="res://assets/ui/pasokan_logo.png" id="3_wb0q5"]
+[ext_resource type="StyleBox" uid="uid://xkaake5sy50d" path="res://scenes/ui/button1.tres" id="4_7suek"]
 [ext_resource type="Texture2D" uid="uid://dk07cki2k8b6j" path="res://assets/ui/time_icon.svg" id="4_btxxm"]
+[ext_resource type="StyleBox" uid="uid://cfpldc73yspxo" path="res://scenes/ui/button1_pressed.tres" id="5_otr3d"]
 [ext_resource type="Texture2D" uid="uid://d4awfn412vnfn" path="res://assets/ui/supply_icon.svg" id="5_wb0q5"]
+[ext_resource type="StyleBox" uid="uid://do7kvj4upufrt" path="res://scenes/ui/button1_hover.tres" id="6_8ekit"]
 [ext_resource type="Texture2D" uid="uid://clc27sg3e3jux" path="res://assets/ui/routes_icon.svg" id="6_q85j6"]
+[ext_resource type="StyleBox" uid="uid://de80ddpc4m8fr" path="res://scenes/ui/button.tres" id="7_n4uci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwffn"]
 
 [node name="MainMenu" type="Control" unique_id=2003152575]
 layout_mode = 3
@@ -89,6 +95,9 @@ custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 tooltip_text = "Coming soon di versi final!"
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("4_7suek")
+theme_override_styles/pressed = ExtResource("5_otr3d")
+theme_override_styles/hover = ExtResource("6_8ekit")
 disabled = true
 text = "Continue"
 
@@ -97,6 +106,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("4_7suek")
+theme_override_styles/pressed = ExtResource("5_otr3d")
+theme_override_styles/hover = ExtResource("6_8ekit")
 text = "New Game"
 
 [node name="Settings" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=1788426687]
@@ -105,6 +117,9 @@ custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 tooltip_text = "Coming soon di versi final!"
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("4_7suek")
+theme_override_styles/pressed = ExtResource("5_otr3d")
+theme_override_styles/hover = ExtResource("6_8ekit")
 disabled = true
 text = "Settings"
 
@@ -113,6 +128,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("4_7suek")
+theme_override_styles/pressed = ExtResource("5_otr3d")
+theme_override_styles/hover = ExtResource("6_8ekit")
 text = "Credits"
 
 [node name="ExitButton" type="Button" parent="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation" unique_id=810861435]
@@ -120,6 +138,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("4_7suek")
+theme_override_styles/pressed = ExtResource("5_otr3d")
+theme_override_styles/hover = ExtResource("6_8ekit")
 text = "Exit"
 
 [node name="RegionGap" type="Control" parent="SafeMargin/ScreenColumn/MainRow" unique_id=889844636]
@@ -135,6 +156,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(420, 440)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cwffn")
 current_tab = 0
 tabs_visible = false
 
@@ -155,6 +177,7 @@ horizontal_alignment = 1
 
 [node name="RecordPanel" type="PanelContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn" unique_id=415463759]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("7_n4uci")
 
 [node name="RecordMargin" type="MarginContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel" unique_id=2002427824]
 layout_mode = 2
@@ -168,6 +191,7 @@ layout_mode = 2
 theme_override_constants/separation = 28
 
 [node name="RecordLevelLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows" unique_id=2096031290]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Level 1"
@@ -185,6 +209,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="BestDayLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/DayRow" unique_id=370331222]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Day: -"
@@ -202,6 +227,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="BestTimeLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/TimeRow" unique_id=2110237552]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Time: --:--:--"
@@ -219,6 +245,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="BestLogisticsLabel" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/RecordView/RecordColumn/RecordPanel/RecordMargin/RecordRows/LogisticsRow" unique_id=1875120786]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Supplies Delivered: -"
@@ -251,6 +278,7 @@ layout_mode = 2
 [node name="CreditsPanel" type="PanelContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn" unique_id=1710056676]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("7_n4uci")
 
 [node name="CreditsMargin" type="MarginContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel" unique_id=1299576831]
 layout_mode = 2
@@ -261,6 +289,7 @@ theme_override_constants/margin_bottom = 28
 
 [node name="CreditsList" type="VBoxContainer" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin" unique_id=1430559714]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="CreditsTitle" type="Label" parent="SafeMargin/ScreenColumn/MainRow/RightRegion/RightSwitcher/CreditsView/CreditsColumn/CreditsPanel/CreditsMargin/CreditsList" unique_id=2097382298]
 layout_mode = 2
@@ -296,6 +325,7 @@ layout_mode = 2
 text = "Sparkle Studio, 2026"
 
 [connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Continue" to="." method="show_best_record"]
+[connection signal="pressed" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/Continue" to="." method="_on_continue_pressed"]
 [connection signal="focus_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="show_best_record"]
 [connection signal="mouse_entered" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="show_best_record"]
 [connection signal="pressed" from="SafeMargin/ScreenColumn/MainRow/LeftRegion/LeftColumn/Navigation/NewGameButton" to="." method="_on_new_game_button_pressed"]

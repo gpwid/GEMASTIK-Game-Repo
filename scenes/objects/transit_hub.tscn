@@ -7,11 +7,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyby3"]
 size = Vector2(176, 112)
 
-[node name="TransitHub" type="Area2D" unique_id=958924192]
+[node name="TransitHub" type="Area2D" unique_id=958924192 groups=["transit_hubs"]]
 script = ExtResource("1_a2w1y")
 
 [node name="LandVisual" type="Sprite2D" parent="." unique_id=1824309790]
 scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vyby3")
+
+[node name="RouteOutlineSprite" type="Sprite2D" parent="." unique_id=223443857]
+visible = false
+z_index = -1
+scale = Vector2(0.53, 0.53)
 texture = ExtResource("2_vyby3")
 
 [node name="PortVisual" type="Sprite2D" parent="." unique_id=730421933]

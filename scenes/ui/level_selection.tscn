@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dhjuenr374e5c" path="res://scripts/ui/level_selection.gd" id="1_l1igk"]
 [ext_resource type="Texture2D" uid="uid://258glpmpc5j7" path="res://assets/ui/background_blur_mainmenu.png" id="1_r4y5g"]
+[ext_resource type="StyleBox" uid="uid://xkaake5sy50d" path="res://scenes/ui/button1.tres" id="3_yssoo"]
+[ext_resource type="StyleBox" uid="uid://cfpldc73yspxo" path="res://scenes/ui/button1_pressed.tres" id="4_hg3rx"]
+[ext_resource type="StyleBox" uid="uid://do7kvj4upufrt" path="res://scenes/ui/button1_hover.tres" id="5_n7r7k"]
 
 [node name="LevelSelection" type="Control" unique_id=878392079]
 layout_mode = 3
@@ -58,6 +61,9 @@ mouse_filter = 2
 [node name="BackButton" type="Button" parent="SafeMargin/ScreenColumn/HeaderRow" unique_id=2079480511]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = ExtResource("3_yssoo")
+theme_override_styles/pressed = ExtResource("4_hg3rx")
+theme_override_styles/hover = ExtResource("5_n7r7k")
 text = "Back
 "
 
@@ -89,6 +95,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 600)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("3_yssoo")
+theme_override_styles/pressed = ExtResource("4_hg3rx")
+theme_override_styles/hover = ExtResource("5_n7r7k")
 text = "Level 1
 "
 
@@ -98,6 +107,9 @@ custom_minimum_size = Vector2(280, 600)
 layout_mode = 2
 tooltip_text = "Coming soon yaa!"
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("3_yssoo")
+theme_override_styles/pressed = ExtResource("4_hg3rx")
+theme_override_styles/hover = ExtResource("5_n7r7k")
 disabled = true
 text = "Level 2
 "
@@ -108,6 +120,9 @@ custom_minimum_size = Vector2(280, 600)
 layout_mode = 2
 tooltip_text = "Coming soon yaa!"
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("3_yssoo")
+theme_override_styles/pressed = ExtResource("4_hg3rx")
+theme_override_styles/hover = ExtResource("5_n7r7k")
 disabled = true
 text = "Endless 
 Mode

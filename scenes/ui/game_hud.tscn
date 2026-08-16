@@ -83,12 +83,11 @@ icon_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-tooltip_text = "Coming soon di final!"
+tooltip_text = "Pengaturan"
 theme_override_styles/normal = ExtResource("4_1ryph")
 theme_override_styles/pressed = ExtResource("5_j6s3p")
 theme_override_styles/hover = ExtResource("6_6ns2j")
 theme_override_styles/disabled = ExtResource("8_kgd86")
-disabled = true
 icon = ExtResource("5_1ryph")
 icon_alignment = 1
 
@@ -219,4 +218,5 @@ layout_mode = 0
 
 [connection signal="pressed" from="ScreenMargin/ScreenColumn/TopBar/TopLeftControls/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ScreenMargin/ScreenColumn/TopBar/TopLeftControls/SpeedButton" to="." method="_on_speed_button_pressed"]
+[connection signal="pressed" from="ScreenMargin/ScreenColumn/TopBar/TopLeftControls/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ScreenMargin/ScreenColumn/TopBar/TopLeftControls/UndoRouteButton" to="." method="_on_undo_route_button_pressed"]

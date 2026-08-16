@@ -3,6 +3,8 @@ extends Control
 
 signal undo_route_requested
 
+const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
+
 @export var seconds_per_day: float = 60.0
 
 @export var pause_icon: Texture2D
@@ -16,6 +18,7 @@ var last_displayed_second: int = -1
 @onready var pause_button: Button = %PauseButton
 @onready var speed_button: Button = %SpeedButton
 @onready var undo_route_button: Button = %UndoRouteButton
+@onready var settings_button: Button = %SettingsButton
 
 @onready var day_label: Label = %DayLabel
 @onready var time_label: Label = %TimeLabel
@@ -54,9 +57,7 @@ func update_time_display() -> void:
 
 	time_label.text = "%02d:%02d:%02d" % [hours, minutes, seconds]
 
-	var current_day: int = floori(elapsed_game_time / seconds_per_day) + 1
-
-	day_label.text = str(current_day)
+	day_label.text = str(get_current_day())
 
 func _on_pause_button_pressed() -> void:
 	var should_pause: bool = not get_tree().paused
@@ -83,6 +84,18 @@ func _on_speed_button_pressed() -> void:
 	
 func _on_undo_route_button_pressed() -> void:
 	undo_route_requested.emit()
+
+func _on_settings_button_pressed() -> void:
+	if not ResourceLoader.exists(MAIN_MENU_PATH):
+		push_error(
+			"GameHUD: Main Menu tidak ditemukan: "
+			+ MAIN_MENU_PATH
+		)
+		return
+
+	get_tree().paused = false
+	Engine.time_scale = 1.0
+	get_tree().change_scene_to_file(MAIN_MENU_PATH)
 	
 func set_can_undo(can_undo: bool) -> void:
 	undo_route_button.disabled = not can_undo
@@ -102,6 +115,13 @@ func show_vehicle_info(vehicle: TransportVehicle) -> void:
 	
 func hide_vehicle_info() -> void:
 	vehicle_info_panel.hide_vehicle_info()
+
+func get_elapsed_game_time() -> float:
+	return elapsed_game_time
+
+func get_current_day() -> int:
+	var safe_seconds_per_day: float = maxf(seconds_per_day, 0.001)
+	return floori(elapsed_game_time / safe_seconds_per_day) + 1
 
 func _exit_tree() -> void:
 	Engine.time_scale = 1.0

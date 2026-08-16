@@ -15,6 +15,8 @@ var is_connected_to_supply: bool = false
 @onready var port_visual: Sprite2D = $PortVisual
 @onready var truck_stop: Marker2D = $TruckStop
 @onready var ship_dock: Marker2D = $ShipDock
+@onready var route_outline_sprite: Sprite2D = $RouteOutlineSprite
+@export var outline_scale_multiplier: float = 1.05
 
 func supports_truck() -> bool:
 	return true
@@ -48,3 +50,18 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func update_hub_visual() -> void:
 	land_visual.visible = not is_port
 	port_visual.visible = is_port
+
+	var active_visual: Sprite2D
+
+	if is_port:
+		active_visual = port_visual
+	else:
+		active_visual = land_visual
+
+	route_outline_sprite.texture = active_visual.texture
+	route_outline_sprite.position = active_visual.position
+	route_outline_sprite.rotation = active_visual.rotation
+
+	route_outline_sprite.scale = (
+		active_visual.scale * outline_scale_multiplier
+	)

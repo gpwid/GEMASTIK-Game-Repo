@@ -9,6 +9,12 @@ size = Vector2(240, 192)
 [node name="SupplyHub" type="Area2D" unique_id=1183306678]
 script = ExtResource("1_h5toe")
 
+[node name="RouteOutlineSprite" type="Sprite2D" parent="." unique_id=1333591096]
+visible = false
+z_index = -1
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("2_h5toe")
+
 [node name="Visual" type="Sprite2D" parent="." unique_id=601473558]
 texture = ExtResource("2_h5toe")
 
