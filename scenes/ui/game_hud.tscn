@@ -3,18 +3,18 @@
 [ext_resource type="Script" uid="uid://b4ja4anfwcibb" path="res://scripts/ui/game_hud.gd" id="1_ehshv"]
 [ext_resource type="Texture2D" uid="uid://cn26mhtxp5hcb" path="res://assets/ui/pause_icon.svg" id="2_4qk33"]
 [ext_resource type="Texture2D" uid="uid://b8v1cr88afyad" path="res://assets/ui/play_icon.svg" id="3_tldsg"]
-[ext_resource type="StyleBox" uid="uid://de80ddpc4m8fr" path="res://scenes/ui/button.tres" id="4_1ryph"]
+[ext_resource type="StyleBox" uid="uid://bob6k72nyqg1b" path="res://scenes/styleboxes/button.tres" id="4_j2336"]
 [ext_resource type="Texture2D" uid="uid://c2fupyqnie77g" path="res://assets/ui/fast_forward_icon.svg" id="4_sd8kv"]
-[ext_resource type="StyleBox" uid="uid://c7l4v7qsy1ast" path="res://scenes/ui/token_glass.tres" id="4_tldsg"]
 [ext_resource type="Texture2D" uid="uid://c13gdnjlb67e0" path="res://assets/ui/settings_icon.svg" id="5_1ryph"]
-[ext_resource type="StyleBox" uid="uid://cllsdwl8huj4x" path="res://scenes/ui/button_pressed.tres" id="5_j6s3p"]
-[ext_resource type="StyleBox" uid="uid://bqlhkmrlxubua" path="res://scenes/ui/button_hover.tres" id="6_6ns2j"]
+[ext_resource type="StyleBox" uid="uid://evx47kqfsl18" path="res://scenes/styleboxes/button_pressed.tres" id="5_kgd86"]
+[ext_resource type="StyleBox" uid="uid://0nekqp6xy778" path="res://scenes/styleboxes/button_hover.tres" id="6_81w0g"]
 [ext_resource type="Texture2D" uid="uid://bej4cefocbx40" path="res://assets/ui/day_icon.svg" id="6_j6s3p"]
 [ext_resource type="Texture2D" uid="uid://dk07cki2k8b6j" path="res://assets/ui/time_icon.svg" id="7_6ns2j"]
 [ext_resource type="Texture2D" uid="uid://d4awfn412vnfn" path="res://assets/ui/supply_icon.svg" id="8_j2336"]
-[ext_resource type="StyleBox" uid="uid://dqgl3b8h5cex1" path="res://scenes/ui/disabledbutton.tres" id="8_kgd86"]
+[ext_resource type="StyleBox" uid="uid://clpmvrxt5rv8h" path="res://scenes/styleboxes/disabledbutton.tres" id="8_jpq7v"]
 [ext_resource type="Texture2D" uid="uid://b4mnfm1m36kx5" path="res://assets/ui/undo_icon.svg" id="9_6ns2j"]
 [ext_resource type="Texture2D" uid="uid://clc27sg3e3jux" path="res://assets/ui/routes_icon.svg" id="9_kgd86"]
+[ext_resource type="StyleBox" uid="uid://dfbhag8jgm5fi" path="res://scenes/styleboxes/token_glass.tres" id="11_dom06"]
 [ext_resource type="PackedScene" uid="uid://ve4c787u33ew" path="res://scenes/ui/vehicle_info_panel.tscn" id="14_j6s3p"]
 
 [node name="GameHud" type="Control" unique_id=257253525]
@@ -47,7 +47,7 @@ theme_override_constants/margin_bottom = 24
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TopBar" type="HBoxContainer" parent="ScreenMargin/ScreenColumn" unique_id=1570169896]
+[node name="TopBar" type="HBoxContainer" parent="ScreenMargin/ScreenColumn" unique_id=1570169896 groups=["tutorial_top_bar"]]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
@@ -63,9 +63,9 @@ theme_override_constants/separation = 24
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_styles/normal = ExtResource("4_1ryph")
-theme_override_styles/pressed = ExtResource("5_j6s3p")
-theme_override_styles/hover = ExtResource("6_6ns2j")
+theme_override_styles/normal = ExtResource("4_j2336")
+theme_override_styles/pressed = ExtResource("5_kgd86")
+theme_override_styles/hover = ExtResource("6_81w0g")
 icon = ExtResource("2_4qk33")
 icon_alignment = 1
 
@@ -73,9 +73,9 @@ icon_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_styles/normal = ExtResource("4_1ryph")
-theme_override_styles/pressed = ExtResource("5_j6s3p")
-theme_override_styles/hover = ExtResource("6_6ns2j")
+theme_override_styles/normal = ExtResource("4_j2336")
+theme_override_styles/pressed = ExtResource("5_kgd86")
+theme_override_styles/hover = ExtResource("6_81w0g")
 icon = ExtResource("4_sd8kv")
 icon_alignment = 1
 
@@ -84,10 +84,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 tooltip_text = "Pengaturan"
-theme_override_styles/normal = ExtResource("4_1ryph")
-theme_override_styles/pressed = ExtResource("5_j6s3p")
-theme_override_styles/hover = ExtResource("6_6ns2j")
-theme_override_styles/disabled = ExtResource("8_kgd86")
+theme_override_styles/normal = ExtResource("4_j2336")
+theme_override_styles/pressed = ExtResource("5_kgd86")
+theme_override_styles/hover = ExtResource("6_81w0g")
+theme_override_styles/disabled = ExtResource("8_jpq7v")
 icon = ExtResource("5_1ryph")
 icon_alignment = 1
 
@@ -95,10 +95,10 @@ icon_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_styles/normal = ExtResource("4_1ryph")
-theme_override_styles/pressed = ExtResource("5_j6s3p")
-theme_override_styles/hover = ExtResource("6_6ns2j")
-theme_override_styles/disabled = ExtResource("8_kgd86")
+theme_override_styles/normal = ExtResource("4_j2336")
+theme_override_styles/pressed = ExtResource("5_kgd86")
+theme_override_styles/hover = ExtResource("6_81w0g")
+theme_override_styles/disabled = ExtResource("8_jpq7v")
 icon = ExtResource("9_6ns2j")
 icon_alignment = 1
 
@@ -111,7 +111,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(520, 64)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("4_tldsg")
+theme_override_styles/panel = ExtResource("11_dom06")
 
 [node name="StatsMargin" type="MarginContainer" parent="ScreenMargin/ScreenColumn/TopBar/TopRightStats" unique_id=1568072243]
 layout_mode = 2

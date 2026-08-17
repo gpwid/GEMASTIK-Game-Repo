@@ -1,6 +1,7 @@
 # Godot-specific ignores
 .godot/
 *.translation
+build_win/
 
 # OS-generated files
 .DS_Store

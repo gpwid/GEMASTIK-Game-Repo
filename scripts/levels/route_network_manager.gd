@@ -326,7 +326,7 @@ func finish_connection(
 
 	if not register_segment(new_segment):
 		new_segment.queue_free()
-		cancel_route_drawing()
+		_reject_connection("Segment tidak dapat dimasukkan ke rute ekspedisi")
 		return
 
 	created_segments.append(new_segment)
@@ -340,11 +340,13 @@ func finish_connection(
 		" | Moda: ",
 		RouteSegment.TransportMode.keys()[mode]
 	)
+	AudioManager.play_route_connected()
 	cancel_route_drawing()
 
 
 func _reject_connection(reason: String) -> void:
 	print("[RouteNetworkManager] ", reason)
+	AudioManager.play_error()
 	cancel_route_drawing()
 
 
@@ -398,7 +400,6 @@ func can_continue_route_from(start_node: Area2D) -> bool:
 
 
 func register_segment(new_segment: RouteSegment) -> bool:
-	# Prioritaskan rute terbaru agar jalur paralel tidak salah digabung.
 	for index in range(expedition_routes.size() - 1, -1, -1):
 		var expedition_route := expedition_routes[index]
 		if expedition_route.add_segment(new_segment):
@@ -741,7 +742,8 @@ func _on_leader_token_drag_released(token: LeaderToken) -> void:
 	if dragged_leader_token != token:
 		return
 
-	var target_route := highlighted_expedition_route
+	var target_route: ExpeditionRoute = highlighted_expedition_route
+
 	if target_route == null:
 		target_route = find_expedition_route_at_position(
 			route_preview.get_global_mouse_position()
@@ -750,12 +752,18 @@ func _on_leader_token_drag_released(token: LeaderToken) -> void:
 	_clear_leader_drop_highlight()
 
 	if target_route == null:
-		print("[RouteNetworkManager] Drop gagal: tidak ada rute lengkap")
+		print(
+			"[RouteNetworkManager] Drop gagal: ",
+			"tidak ada rute lengkap"
+		)
+
+		AudioManager.play_error()
+
 		token.return_to_roster()
 		dragged_leader_token = null
 		return
 
-	var assigned := target_route.try_assign_leader(
+	var assigned: bool = target_route.try_assign_leader(
 		token.leader_id,
 		token.leader_name,
 		token.leader_color,
@@ -764,8 +772,10 @@ func _on_leader_token_drag_released(token: LeaderToken) -> void:
 
 	if assigned:
 		leader_roster.consume_leader_token(token)
+		AudioManager.play_random_leader_voice()
 	else:
 		token.return_to_roster()
+		AudioManager.play_error()
 
 	dragged_leader_token = null
 

@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://wwykjr0ayo08" path="res://scenes/ui/tutorial_overlay.tscn" id="9_jmes4"]
 [ext_resource type="Script" uid="uid://cfeuvjn2rolxk" path="res://scripts/ui/tutorial_step.gd" id="10_tyxjt"]
 [ext_resource type="PackedScene" uid="uid://uvto0wf2h7vy" path="res://scenes/ui/game_hud.tscn" id="11_ijn0p"]
-[ext_resource type="StyleBox" uid="uid://xkaake5sy50d" path="res://scenes/ui/button1.tres" id="12_cwffn"]
-[ext_resource type="StyleBox" uid="uid://cfpldc73yspxo" path="res://scenes/ui/button1_pressed.tres" id="13_e6lid"]
-[ext_resource type="StyleBox" uid="uid://do7kvj4upufrt" path="res://scenes/ui/button1_hover.tres" id="14_3g50r"]
+[ext_resource type="StyleBox" uid="uid://cjya172fd3jhi" path="res://scenes/styleboxes/button1.tres" id="12_cwffn"]
+[ext_resource type="StyleBox" uid="uid://cvqm782lkeh76" path="res://scenes/styleboxes/button1_pressed.tres" id="13_e6lid"]
+[ext_resource type="StyleBox" uid="uid://dsvtwonjmai68" path="res://scenes/styleboxes/button1_hover.tres" id="14_3g50r"]
 
 [sub_resource type="Resource" id="Resource_tyxjt"]
 script = ExtResource("10_tyxjt")
@@ -81,17 +81,6 @@ Selamat bekerja!"
 target_group = &"tutorial_hud"
 metadata/_custom_type_script = "uid://cfeuvjn2rolxk"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
-bg_color = Color(0.0962, 0.27873328, 0.37, 0.54509807)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="Resource" id="Resource_0np5u"]
 script = ExtResource("8_r72dd")
 leader_id = "1"
@@ -127,6 +116,17 @@ leader_name = "Nakata Christian"
 leader_color = Color(0.30752915, 0.2538695, 0.78125, 1)
 metadata/_custom_type_script = "uid://dku583bjk3re2"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvc87"]
+bg_color = Color(0.0962, 0.27873328, 0.37, 0.54509807)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Level01" type="Node2D" unique_id=2095256609 node_paths=PackedStringArray("route_network_manager", "game_hud", "sustain_timer", "game_over_screen", "failed_village_label", "victory_screen", "tutorial_overlay")]
 script = ExtResource("1_uvc87")
 route_network_manager = NodePath("RouteNetworkManager")
@@ -148,15 +148,15 @@ centered = false
 [node name="MapObjects" type="Node2D" parent="World" unique_id=1118112085]
 
 [node name="SupplyHub" parent="World/MapObjects" unique_id=1183306678 groups=["tutorial_supply_hub"] instance=ExtResource("2_i2aat")]
-position = Vector2(1184, 280)
+position = Vector2(1240, 192)
 scale = Vector2(0.5, 0.5)
 
 [node name="VillageA" parent="World/MapObjects" unique_id=1158911162 groups=["tutorial_village"] instance=ExtResource("3_2djvx")]
-position = Vector2(112, 296)
+position = Vector2(80, 440)
 is_coastal = true
 
 [node name="VillageB" parent="World/MapObjects" unique_id=346501832 groups=["tutorial_village"] instance=ExtResource("3_2djvx")]
-position = Vector2(1616, 520)
+position = Vector2(1648, 552)
 
 [node name="VillageC" parent="World/MapObjects" unique_id=2063453462 groups=["tutorial_village"] instance=ExtResource("3_2djvx")]
 position = Vector2(1924, 929)
@@ -167,14 +167,18 @@ is_coastal = true
 position = Vector2(2656, 1536)
 island_id = 3
 
+[node name="VillageE" parent="World/MapObjects" unique_id=260661735 groups=["tutorial_village"] instance=ExtResource("3_2djvx")]
+position = Vector2(1816, 1672)
+island_id = 3
+
 [node name="TransitHubs" type="Node2D" parent="World/MapObjects" unique_id=1659810284]
 
 [node name="TransitLandA" parent="World/MapObjects/TransitHubs" unique_id=958924192 groups=["tutorial_transit_hub"] instance=ExtResource("3_qdh5e")]
-position = Vector2(608, 304)
+position = Vector2(656, 600)
 scale = Vector2(0.5, 0.5)
 
 [node name="TransitLandB" parent="World/MapObjects/TransitHubs" unique_id=469977035 groups=["tutorial_transit_hub"] instance=ExtResource("3_qdh5e")]
-position = Vector2(2128, 1528)
+position = Vector2(2232, 1448)
 scale = Vector2(0.5, 0.5)
 island_id = 3
 
@@ -184,7 +188,7 @@ scale = Vector2(0.5, 0.5)
 is_port = true
 
 [node name="PortB" parent="World/MapObjects/TransitHubs" unique_id=2123855037 groups=["tutorial_transit_hub"] instance=ExtResource("3_qdh5e")]
-position = Vector2(1040, 1200)
+position = Vector2(1040, 1168)
 scale = Vector2(0.5, 0.5)
 is_port = true
 island_id = 1
@@ -238,7 +242,7 @@ supply_hub = NodePath("../World/MapObjects/SupplyHub")
 leader_roster = NodePath("../UILayer/UI/LeaderRoster")
 
 [node name="SustainTimer" type="Timer" parent="." unique_id=737803136 groups=["transit_hubs"]]
-wait_time = 20.0
+wait_time = 60.0
 one_shot = true
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=835038402]
@@ -254,10 +258,24 @@ steps = Array[ExtResource("10_tyxjt")]([SubResource("Resource_tyxjt"), SubResour
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="TopBar" parent="UILayer/UI/GameHud/ScreenMargin/ScreenColumn" parent_id_path=PackedInt32Array(257253525, 951860311) index="0" unique_id=1570169896 groups=["tutorial_top_bar"]]
+[node name="LeaderRoster" parent="UILayer/UI" unique_id=1318327746 groups=["tutorial_leader_roster"] instance=ExtResource("7_1ey3t")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -180.0
+offset_right = 0.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 2
+leader_profiles = Array[ExtResource("8_r72dd")]([SubResource("Resource_0np5u"), SubResource("Resource_ot4fj"), SubResource("Resource_q0bre"), SubResource("Resource_cwffn"), SubResource("Resource_e6lid")])
 
 [node name="GameOverScreen" type="ColorRect" parent="UILayer/UI" unique_id=459150233]
 process_mode = 2
+visible = false
+z_index = 1000
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -331,6 +349,7 @@ text = "MAIN MENU"
 [node name="VictoryScreen" type="ColorRect" parent="UILayer/UI" unique_id=91111097]
 process_mode = 2
 visible = false
+z_index = 1000
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -428,20 +447,6 @@ theme_override_styles/pressed = ExtResource("13_e6lid")
 theme_override_styles/hover = ExtResource("14_3g50r")
 text = "MAIN MENU"
 
-[node name="LeaderRoster" parent="UILayer/UI" unique_id=1318327746 groups=["tutorial_leader_roster"] instance=ExtResource("7_1ey3t")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -180.0
-offset_right = 0.0
-offset_bottom = 180.0
-grow_horizontal = 0
-grow_vertical = 2
-leader_profiles = Array[ExtResource("8_r72dd")]([SubResource("Resource_0np5u"), SubResource("Resource_ot4fj"), SubResource("Resource_q0bre"), SubResource("Resource_cwffn"), SubResource("Resource_e6lid")])
-
 [connection signal="timeout" from="SustainTimer" to="." method="_on_sustain_timer_timeout"]
 [connection signal="pressed" from="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UILayer/UI/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GameOverLevelSelectButton" to="." method="_on_level_selection_button_pressed"]
@@ -449,5 +454,3 @@ leader_profiles = Array[ExtResource("8_r72dd")]([SubResource("Resource_0np5u"), 
 [connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelSelectionButton" to="." method="_on_level_selection_button_pressed"]
 [connection signal="pressed" from="UILayer/UI/VictoryScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-
-[editable path="UILayer/UI/GameHud"]

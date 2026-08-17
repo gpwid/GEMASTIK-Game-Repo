@@ -18,11 +18,11 @@ infrastructure_icon = ExtResource("4_p3h2e")
 
 [node name="CrisisGauge" type="TextureProgressBar" parent="." unique_id=740801342]
 z_index = -1
-offset_left = -38.0
-offset_top = -38.0
-offset_right = 218.0
-offset_bottom = 218.0
-scale = Vector2(0.3, 0.3)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 192.0
+offset_bottom = 192.0
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 step = 0.1
 fill_mode = 4

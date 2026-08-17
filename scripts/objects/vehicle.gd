@@ -79,11 +79,19 @@ func consume_fuel(distance_traveled: float) -> void:
 	if is_broken_down:
 		return
 
+	var previous_fuel: float = current_fuel
+
 	current_fuel = maxf(
-		current_fuel - distance_traveled * fuel_consumption_per_distance,
+		current_fuel
+		- distance_traveled * fuel_consumption_per_distance,
 		0.0
 	)
 
+	if (
+		previous_fuel > red_fuel_threshold
+		and current_fuel <= red_fuel_threshold
+	):
+		AudioManager.play_critical_fuel()
 
 func update_fuel_condition(delta: float) -> void:
 	if is_broken_down:
@@ -94,10 +102,18 @@ func update_fuel_condition(delta: float) -> void:
 		return
 
 	empty_fuel_duration += delta
+
 	if empty_fuel_duration >= empty_fuel_grace_duration:
 		is_broken_down = true
+
+		AudioManager.play_vehicle_breakdown()
 		broken_down.emit(self)
-		print("[Vehicle] ", leader_name, " mengalami breakdown")
+
+		print(
+			"[Vehicle] ",
+			leader_name,
+			" mengalami breakdown"
+		)
 
 
 func refuel() -> void:

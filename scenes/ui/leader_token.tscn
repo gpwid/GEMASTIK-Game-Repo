@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dqhb2rmh35xid"]
 
-[ext_resource type="StyleBox" uid="uid://c7l4v7qsy1ast" path="res://scenes/ui/token_glass.tres" id="1_aupt6"]
-[ext_resource type="StyleBox" uid="uid://d1sadboi0koi4" path="res://scenes/ui/token_glass_pressed.tres" id="2_ye8va"]
-[ext_resource type="StyleBox" uid="uid://cgrprpes1516a" path="res://scenes/ui/token_glass_hover.tres" id="3_dmh4b"]
+[ext_resource type="StyleBox" uid="uid://c7l4v7qsy1ast" path="res://scenes/styleboxes/token_glass.tres" id="1_aupt6"]
+[ext_resource type="StyleBox" uid="uid://d1sadboi0koi4" path="res://scenes/styleboxes/token_glass_pressed.tres" id="2_ye8va"]
+[ext_resource type="StyleBox" uid="uid://cgrprpes1516a" path="res://scenes/styleboxes/token_glass_hover.tres" id="3_dmh4b"]
 [ext_resource type="Script" uid="uid://m0ucq2yqp004" path="res://scripts/ui/leader_token.gd" id="4_sfbaj"]
 [ext_resource type="Texture2D" uid="uid://d357bfo6qptjb" path="res://assets/ui/worker_icon.svg" id="5_77ugm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n8nus"]
 
-[node name="LeaderToken" type="Button" unique_id=1655876123]
+[node name="LeaderToken" type="Button" unique_id=1655876123 groups=["no_ui_click"]]
 material = SubResource("ShaderMaterial_n8nus")
 custom_minimum_size = Vector2(86, 86)
 offset_right = 86.0

@@ -226,10 +226,10 @@ func update_node_route_outline(
 		return
 
 	if active_route_colors.size() == 1:
-		var route_color := (
+		var single_route_color : Color = (
 			active_route_colors.values()[0] as Color
 		)
-		outline_sprite.self_modulate = route_color.lightened(0.15)
+		outline_sprite.self_modulate = single_route_color.lightened(0.15)
 	else:
 		outline_sprite.self_modulate = Color.WHITE
 

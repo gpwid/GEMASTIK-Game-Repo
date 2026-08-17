@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dig87dwbhnkpe"]
+
+[ext_resource type="Script" uid="uid://dtg1mg4o6vrto" path="res://scripts/levels/audio_manager.gd" id="1_ir2sp"]
+[ext_resource type="AudioStream" uid="uid://x05uyin0mx1y" path="res://assets/audio/ocean_ambiance1.wav" id="2_gpnea"]
+[ext_resource type="AudioStream" uid="uid://dp5no6ob3frhd" path="res://assets/audio/ocean_ambiance2.wav" id="3_cajy1"]
+[ext_resource type="AudioStream" uid="uid://blwld2m7bikrp" path="res://assets/audio/leader_voice1.wav" id="4_4dmpq"]
+[ext_resource type="AudioStream" uid="uid://doixm6tbshij1" path="res://assets/audio/leader_voice2.wav" id="5_vuvi0"]
+[ext_resource type="AudioStream" uid="uid://ca8wj8ln0w02p" path="res://assets/audio/leader_voice3.wav" id="6_1ntge"]
+[ext_resource type="AudioStream" uid="uid://d0vhfrkgecbdr" path="res://assets/audio/map_route_connected.wav" id="7_a35ni"]
+[ext_resource type="AudioStream" uid="uid://djk81aknkoikb" path="res://assets/audio/error_sound.wav" id="8_eaumq"]
+[ext_resource type="AudioStream" uid="uid://5k30dnw2ntum" path="res://assets/audio/supply_delivered.wav" id="9_pjlkv"]
+[ext_resource type="AudioStream" uid="uid://8cg2g1j4m3uc" path="res://assets/audio/critical_fuel.wav" id="10_wl345"]
+[ext_resource type="AudioStream" uid="uid://b3snyafi1eale" path="res://assets/audio/car_breaksdown.wav" id="11_68pr8"]
+[ext_resource type="AudioStream" uid="uid://dqplwoq2niwqu" path="res://assets/audio/game_over.wav" id="12_boj8w"]
+[ext_resource type="AudioStream" uid="uid://ctdmkplah204k" path="res://assets/audio/victory_fanfare.wav" id="13_a5sqk"]
+[ext_resource type="AudioStream" uid="uid://otnbijvju2b8" path="res://assets/audio/ui_click.wav" id="14_dnss5"]
+
+[node name="AudioManager" type="Node" unique_id=553146491]
+process_mode = 3
+script = ExtResource("1_ir2sp")
+ambience_tracks = Array[AudioStream]([ExtResource("2_gpnea"), ExtResource("3_cajy1")])
+leader_voices = Array[AudioStream]([ExtResource("4_4dmpq"), ExtResource("5_vuvi0"), ExtResource("6_1ntge")])
+route_connected_sound = ExtResource("7_a35ni")
+error_sound = ExtResource("8_eaumq")
+supply_delivered_sound = ExtResource("9_pjlkv")
+critical_fuel_sound = ExtResource("10_wl345")
+vehicle_breakdown_sound = ExtResource("11_68pr8")
+game_over_sound = ExtResource("12_boj8w")
+victory_sound = ExtResource("13_a5sqk")
+ui_click_sound = ExtResource("14_dnss5")
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="." unique_id=1978071055]
+bus = &"Ambience"
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=2030406072]
+max_polyphony = 8
+bus = &"SFX"
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="." unique_id=2071659519]
+bus = &"Voice"
+
+[node name="UIPlayer" type="AudioStreamPlayer" parent="." unique_id=2083226814]
+max_polyphony = 4
+bus = &"UI"

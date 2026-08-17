@@ -1,10 +1,10 @@
+## Kelas global sebagai basis dan pengendali dari semua aturan level di game
 class_name BaseLevel
 extends Node2D
 
-## Pengendali flow yang dipakai ulang oleh semua level:
-## registrasi Village, HUD, kondisi menang/kalah, dan navigasi level.
-## Seluruh detail rute didelegasikan kepada RouteNetworkManager.
+#bismillah semoga masih ingat semua isi ini
 
+## Ekspor kategori untuk level designer
 @export_category("Level Identity")
 @export var level_id: String = "level_01"
 
@@ -25,11 +25,13 @@ extends Node2D
 @export var tutorial_overlay: Control
 @export var start_tutorial_on_ready: bool = false
 
+# State penting dalam permainan
 var is_game_over: bool = false
 var is_victory: bool = false
 var total_logistics_delivered: int = 0
 var villages: Array[Area2D] = []
 
+# Onready untuk referensi ke label-label Ui agar bisa di modifikasi in-code
 @onready var victory_day_label: Label = %VictoryDayLabel
 @onready var victory_time_label: Label = %VictoryTimeLabel
 @onready var victory_logistics_label: Label = %VictoryLogisticsLabel
@@ -40,9 +42,12 @@ func _ready() -> void:
 		set_process(false)
 		return
 
+	AudioManager.play_random_ambience()
+
 	_register_level_visit()
 	_register_villages()
 	_register_level_systems()
+	
 	game_hud.set_route_count(
 		route_network_manager.expedition_routes.size()
 	)
@@ -224,6 +229,7 @@ func trigger_game_over(failed_village: Area2D) -> void:
 		" gagal menerima bantuan."
 	)
 	game_over_screen.visible = true
+	AudioManager.play_game_over()
 	get_tree().paused = true
 
 func _update_victory_summary() -> void:
@@ -253,8 +259,13 @@ func _on_village_failed(failed_village: Area2D) -> void:
 
 
 func _on_village_cargo_received(received_amount: int) -> void:
+	if received_amount <= 0:
+		return
+
 	total_logistics_delivered += received_amount
 	game_hud.set_logistics_count(total_logistics_delivered)
+
+	AudioManager.play_supply_delivered()
 
 
 func _on_route_count_changed(route_count: int) -> void:
@@ -291,6 +302,7 @@ func _on_sustain_timer_timeout() -> void:
 	)
 	_update_victory_summary()
 	victory_screen.visible = true
+	AudioManager.play_victory()
 	get_tree().paused = true
 	print("[BaseLevel] LEVEL COMPLETED")
 

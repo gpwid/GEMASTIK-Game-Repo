@@ -13,6 +13,7 @@ const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
 var elapsed_game_time: float = 0.0
 var current_game_speed: float = 1.0
 var last_displayed_second: int = -1
+var is_simulation_paused: bool = false
 
 @onready var vehicle_info_panel: VehicleInfoPanel = $VehicleInfoPanel
 @onready var pause_button: Button = %PauseButton
@@ -35,7 +36,7 @@ func _ready() -> void:
 	set_route_count(0)
 	
 func _process(delta: float) -> void:
-	if get_tree().paused:
+	if get_tree().paused or is_simulation_paused:
 		return
 
 	elapsed_game_time += delta
@@ -60,27 +61,42 @@ func update_time_display() -> void:
 	day_label.text = str(get_current_day())
 
 func _on_pause_button_pressed() -> void:
-	var should_pause: bool = not get_tree().paused
-	get_tree().paused = should_pause
+	is_simulation_paused = not is_simulation_paused
 
-	if should_pause:
+	if is_simulation_paused:
+		Engine.time_scale = 0.0
 		pause_button.icon = play_icon
 		pause_button.tooltip_text = "Lanjutkan"
 	else:
+		Engine.time_scale = current_game_speed
 		pause_button.icon = pause_icon
 		pause_button.tooltip_text = "Jeda"
 
-
 func _on_speed_button_pressed() -> void:
-	if current_game_speed == 1.0:
+	if is_simulation_paused:
+		is_simulation_paused = false
 		current_game_speed = 2.0
-		speed_button.self_modulate = Color("#C7F5FF")
+
+		pause_button.icon = pause_icon
+		pause_button.tooltip_text = "Jeda"
 	else:
-		current_game_speed = 1.0
-		speed_button.self_modulate = Color.WHITE
+		if current_game_speed == 1.0:
+			current_game_speed = 2.0
+		else:
+			current_game_speed = 1.0
 
 	Engine.time_scale = current_game_speed
-	speed_button.tooltip_text = str("Kecepatan: ", int(current_game_speed), "x")
+
+	if current_game_speed == 2.0:
+		speed_button.self_modulate = Color("#C7F5FF")
+	else:
+		speed_button.self_modulate = Color.WHITE
+
+	speed_button.tooltip_text = str(
+		"Kecepatan: ",
+		int(current_game_speed),
+		"x"
+	)
 	
 func _on_undo_route_button_pressed() -> void:
 	undo_route_requested.emit()
